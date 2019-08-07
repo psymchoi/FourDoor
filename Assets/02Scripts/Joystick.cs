@@ -60,12 +60,12 @@ public class Joystick : MonoBehaviour
         if (dis < radius)
         {
             stick.position = stickFirstPos + joyVec * dis;
-            PlayerController._uniqueInstance.PLAYERACTION = PlayerController.ePlyAction.WALK;
+            PlayerController._uniqueInstance.PLAYERACTION = PlayerController.ePlyAction.LANTERN_WALK;
         }
         else
         {
             stick.position = stickFirstPos + joyVec * radius;
-            PlayerController._uniqueInstance.PLAYERACTION = PlayerController.ePlyAction.RUN;
+            PlayerController._uniqueInstance.PLAYERACTION = PlayerController.ePlyAction.LANTERN_RUN;
         }
     }
 

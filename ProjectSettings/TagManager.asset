@@ -10,6 +10,8 @@ TagManager:
   - CameraPosRoot
   - Ground
   - Selectable
+  - MonsterRoamRoot
+  - SelectableShop
   layers:
   - Default
   - TransparentFX

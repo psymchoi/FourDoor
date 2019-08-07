@@ -78,13 +78,19 @@ public class ActionCamera : MonoBehaviour
                 float currAngleY = Mathf.LerpAngle(transform.eulerAngles.y, _posPlayer.eulerAngles.y, Time.deltaTime);
 
                 Quaternion rot = Quaternion.Euler(0, currAngleY, 0);
-                _posGoal = _posPlayer.position
+                _posGoal = _posPlayer.position 
                     - (rot * Vector3.forward * _followOffset.z) + (Vector3.up * _followOffset.y);
 
-                if(PlayerController._uniqueInstance.PLAYERACTION == PlayerController.ePlyAction.RUN)
+                if(PlayerController._uniqueInstance.PLAYERACTION == PlayerController.ePlyAction.LANTERN_RUN)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, _posGoal - 
+                    transform.position = Vector3.MoveTowards(transform.position, _posGoal -
                         (rot * Vector3.forward * _followOffset.z * 3.5f), 2 * _movSpeed * Time.deltaTime);               
+                }
+                else if(PlayerController._uniqueInstance.PLAYERACTION == PlayerController.ePlyAction.LANTERN_JUMP
+                    || PlayerController._uniqueInstance.PLAYERACTION == PlayerController.ePlyAction.NOTHING_JUMP)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, _posGoal +
+                        (rot * Vector3.up * _followOffset.y * 3.5f), 10 * _movSpeed * Time.deltaTime);
                 }
                 else
                 {

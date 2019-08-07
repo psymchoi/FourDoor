@@ -18,6 +18,9 @@ public class InGameController : MonoBehaviour
 
     [SerializeField] GameObject _prefabPlayer;
     [SerializeField] GameObject _plyStartPosition;
+    [SerializeField] GameObject _record;
+    [SerializeField] GameObject _pianoClown;
+    [SerializeField] Light[] _candleLight;
 
     eGameState _curGameState;
 
@@ -49,16 +52,9 @@ public class InGameController : MonoBehaviour
         
     }
 
-    public void SettingPlayer()
-    {
-        _prefabPlayer.transform.position = _plyStartPosition.transform.position;
-    }
-
     public void GameReady()
     {
         _curGameState = eGameState.READY;
-
-
     }
 
     public void GameMapSetting()
@@ -66,8 +62,19 @@ public class InGameController : MonoBehaviour
         _curGameState = eGameState.START;
         // 플레이어 생성.
         GameObject go = Instantiate(_prefabPlayer, _plyStartPosition.transform.position, _plyStartPosition.transform.rotation);
+        
         // 카메라 워킹위치 세팅.
         Transform tf = GameObject.FindGameObjectWithTag("CameraPosRoot").transform;
-        Camera.main.GetComponent<ActionCamera>().SetCaemraActionRoot(tf);      
+        Camera.main.GetComponent<ActionCamera>().SetCaemraActionRoot(tf);
+
+        // 촛대 밝기 상태
+        for(int n = 0; n < _candleLight.Length; n++)
+        {
+            _candleLight[n].range = 0f;
+        }
+
+        // 레코드판 및 피아노맨
+        _record.SetActive(false);
+        _pianoClown.SetActive(false);
     }
 }

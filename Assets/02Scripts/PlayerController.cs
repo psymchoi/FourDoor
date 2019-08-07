@@ -6,31 +6,38 @@ public class PlayerController : MonoBehaviour
 {
     public enum ePlyAction
     {
-        IDLE_STANDING,
-        IDLE_AROUND,
-        WALK,
-        RUN,
-        JUMP,
+        NOTHING_IDLE_STANDING,
+        NOTHING_IDLE_AROUND,
+        NOTHING_WALK,
+        NOTHING_RUN,
+        NOTHING_JUMP,
+        EQUIP_LANTERN,
+        LANTERN_IDLE_STANDING,
+        LANTERN_IDLE_AROUND,
+        LANTERN_WALK,
+        LANTERN_RUN,
+        LANTERN_JUMP,
         DIE
     }
 
     public static PlayerController _uniqueInstance;
 
-    // [SerializeField] FixedTouchField TouchField;
-    // protected float CameraAngle;
-    // protected float CameraAngleSpeed = 0.2f;
+    [SerializeField] GameObject _lantern;
     [SerializeField] float walkSpeed = 3.0f;
     [SerializeField] float runSpeed = 5.0f;
-    public float _rotateSpeed = 180;
-    float MoveX;
-    float MoveZ;
-    bool _isDead;
+    [SerializeField] float mouseSensitivity;
+    [SerializeField] Transform player, playerArms;
 
     Animator _aniCtrl;
     ePlyAction _curAction;
     Vector3 _mov;
 
+    float MoveX;
+    float MoveZ;
     float _timeCheck;
+    bool _isDead;
+    bool _equipLantern;
+
 
     public ePlyAction PLAYERACTION
     {
@@ -42,7 +49,10 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         _uniqueInstance = this;
-        _aniCtrl = GetComponent<Animator>();   
+        _aniCtrl = GetComponent<Animator>();
+
+        _lantern.SetActive(false);
+        _equipLantern = false;
     }
 
     // Update is called once per frame
@@ -54,58 +64,173 @@ public class PlayerController : MonoBehaviour
         if (InGameController._uniqueInstance.NOWGAMESTATE == InGameController.eGameState.PLAY)
         {
             MoveX = Input.GetAxis("Horizontal");      // a, d
-            MoveZ = Input.GetAxis("Vertical");        // w, s
-
-            // Vector3 mov = new Vector3(MoveX, 0, MoveZ);
-            // mov = (mov.magnitude > 1) ? mov.normalized : mov;
-          
-            transform.Rotate(Vector3.up * MoveX * _rotateSpeed * Time.deltaTime);
+            MoveZ = Input.GetAxis("Vertical");        // w, s          
             
-            if (MoveX == 0 && MoveZ == 0)
-            {// wsad값이 없는경우
-                if(MoveX != 0)
-                {// 회전ad값이 있는경우     =>  걷는 모션;
+            _mov = new Vector3(MoveX, 0, MoveZ);
+            _mov = (_mov.magnitude > 1) ? _mov.normalized : _mov;
+
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                _equipLantern = !_equipLantern;
+                if (_equipLantern)
+                {
                     _timeCheck = 0;
-                    ChangedAction(ePlyAction.WALK);
+                    _lantern.SetActive(true);
+                    SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_ON);
                 }
                 else
-                {// 회전ad값이 없는경우     =>  가만히 있는 모션;
-                    _timeCheck += Time.deltaTime;
-                    if(_timeCheck >= 2.5f)
-                        ChangedAction(ePlyAction.IDLE_AROUND);
-                    else
-                        ChangedAction(ePlyAction.IDLE_STANDING);
+                {
+                    _timeCheck = 0;
+                    _lantern.SetActive(false);
+                    SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_OFF);
+                }
+            }
 
+            if(_equipLantern)
+            {// 랜턴을 들 때..
+                _timeCheck += Time.deltaTime;
+                if (MoveX == 0 && MoveZ == 0)
+                {// wsad값이 없는경우
+                    if (MoveX != 0)
+                    {// 회전ad값이 있는경우     =>  걷는 모션;
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            ChangedAction(ePlyAction.LANTERN_JUMP);
+                        }
+                        else
+                        {
+                            ChangedAction(ePlyAction.LANTERN_WALK);
+                        }
+                    }
+                    else
+                    {// 회전ad값이 없는경우     =>  가만히 있는 모션;
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            ChangedAction(ePlyAction.LANTERN_JUMP);
+                        }
+                        else
+                        {
+                            if (_timeCheck >= 0.2f)
+                                ChangedAction(ePlyAction.LANTERN_IDLE_STANDING);
+                            else
+                                ChangedAction(ePlyAction.EQUIP_LANTERN);
+                        }
+                    }
+                }
+                else
+                {// ws값이 있는경우
+                    if (Input.GetKey(KeyCode.LeftShift))
+                    {// 달리고 있을 때
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            ChangedAction(ePlyAction.LANTERN_JUMP);
+                        }
+                        else
+                        {// shift키와 w키가 눌렸을 때       =>  달리는 모션
+                            if (_timeCheck >= 0.2f)
+                                ChangedAction(ePlyAction.LANTERN_RUN);
+                            else
+                                ChangedAction(ePlyAction.EQUIP_LANTERN);
+                        }
+                    }
+                    else
+                    {// 안달리고 있을 때
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            ChangedAction(ePlyAction.LANTERN_JUMP);
+                        }
+                        else
+                        {// shift키와 w키가 눌렸을 때       =>  달리는 모션
+                            if (_timeCheck >= 0.2f)
+                                ChangedAction(ePlyAction.LANTERN_WALK);
+                            else
+                                ChangedAction(ePlyAction.EQUIP_LANTERN);
+                        }
+                    }
                 }
             }
             else
-            {// ws값이 있는경우
-                _timeCheck = 0;
-                if(Input.GetKey(KeyCode.LeftShift) && Input.GetKey(KeyCode.W))
-                {
-                    if (Input.GetKey(KeyCode.Space))
-                    {
-                        ChangedAction(ePlyAction.JUMP);
+            {// 랜턴을 안들때..
+                if (MoveX == 0 && MoveZ == 0)
+                {// wsad값이 없는경우
+                    if(MoveX != 0)
+                    {// 회전ad값이 있는경우     =>  걷는 모션;
+                        _timeCheck = 0;
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            ChangedAction(ePlyAction.LANTERN_JUMP);
+                        }
+                        else
+                        {
+                            ChangedAction(ePlyAction.NOTHING_WALK);
+                        }
                     }
                     else
-                    {// shift키와 w키가 눌렸을 때       =>  달리는 모션;
-                        ChangedAction(ePlyAction.RUN);                    
+                    {// 회전ad값이 없는경우     =>  가만히 있는 모션;
+                        _timeCheck += Time.deltaTime;
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            ChangedAction(ePlyAction.NOTHING_JUMP);
+                        }
+                        else
+                        {
+                            if (_timeCheck >= 2.5f)
+                                ChangedAction(ePlyAction.NOTHING_IDLE_AROUND);
+                            else
+                                ChangedAction(ePlyAction.NOTHING_IDLE_STANDING);
+                        }
                     }
                 }
                 else
-                { // 걷는모션;
-                    if (Input.GetKey(KeyCode.Space))
+                {// ws값이 있는경우
+                    _timeCheck = 0;
+                    if(Input.GetKey(KeyCode.LeftShift))
                     {
-                        ChangedAction(ePlyAction.JUMP);
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            ChangedAction(ePlyAction.NOTHING_JUMP);
+                        }
+                        else
+                        {// shift키와 w키가 눌렸을 때       =>  달리는 모션;
+                            ChangedAction(ePlyAction.NOTHING_RUN);                    
+                        }
                     }
                     else
-                    {// shift키와 w키가 눌렸을 때       =>  달리는 모션;
-                        ChangedAction(ePlyAction.WALK);
-                    }        
+                    { // 걷는모션;
+                        if (Input.GetKeyDown(KeyCode.Space))
+                        {
+                            ChangedAction(ePlyAction.NOTHING_JUMP);
+                        }
+                        else
+                        {// shift키와 w키가 눌렸을 때       =>  달리는 모션;
+                            ChangedAction(ePlyAction.NOTHING_WALK);
+                        }        
+                    }
                 }
             }
-          
+
+            Cursor.lockState = CursorLockMode.Locked;
+            RotateCamera();  
         }
+    }
+
+    void RotateCamera()
+    {
+        float _mouseX = Input.GetAxis("Mouse X");
+        float _mouseY = Input.GetAxis("Mouse Y");
+
+        float rotAmountX = _mouseX * mouseSensitivity;
+        float rotAmountY = _mouseY * mouseSensitivity;
+
+        Vector3 rotPlayeArms = playerArms.transform.rotation.eulerAngles;
+        Vector3 rotPlayer = player.transform.rotation.eulerAngles;
+
+        rotPlayeArms.x -= rotAmountY;
+        rotPlayeArms.z = 0;
+        rotPlayer.y += rotAmountX;
+
+        playerArms.rotation = Quaternion.Euler(rotPlayeArms);
+        player.rotation = Quaternion.Euler(rotPlayer);
     }
 
     void ChangedAction(ePlyAction state)
@@ -115,11 +240,17 @@ public class PlayerController : MonoBehaviour
 
         switch(state)
         {
-            case ePlyAction.WALK:
-                transform.Translate(_mov * MoveZ * walkSpeed * Time.deltaTime);
+            case ePlyAction.NOTHING_WALK:
+                transform.Translate(_mov * walkSpeed * Time.deltaTime);
                 break;
-            case ePlyAction.RUN:
-                transform.Translate(_mov * MoveZ * runSpeed * Time.deltaTime);
+            case ePlyAction.NOTHING_RUN:
+                transform.Translate(_mov * runSpeed * Time.deltaTime);
+                break;
+            case ePlyAction.LANTERN_WALK:
+                transform.Translate(_mov * walkSpeed * Time.deltaTime);
+                break;
+            case ePlyAction.LANTERN_RUN:
+                transform.Translate(_mov * runSpeed * Time.deltaTime);
                 break;
             case ePlyAction.DIE:
                 _isDead = true;
@@ -139,9 +270,15 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Wall") || other.CompareTag("Selectable"))
+        {
             _mov = Vector3.zero;
+        }
         else
-            _mov = Vector3.forward;
+        {
+            // _mov = Vector3.forward;
+           // _mov = new Vector3(MoveX, 0, MoveZ);
+           //_mov = (_mov.magnitude > 1) ? _mov.normalized : _mov;
+        }
     }
 }
 
