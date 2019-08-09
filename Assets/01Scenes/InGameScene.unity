@@ -38,8 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.003995701, g: 0.0002179261, b: 0.000000051515347,
-    a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -554,6 +553,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1377253526}
+    - target: {fileID: 1397207900, guid: 23cf016d72fc973448448bec5dcc93bd, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 6.312
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23cf016d72fc973448448bec5dcc93bd, type: 3}
 --- !u!1 &1688135519 stripped
@@ -683,6 +686,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20640ce5e8ade0440a0d444a2e8689c5, type: 3}
+--- !u!1 &1781904498 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4876753475068572172, guid: c8263cc0ff6746846b26169663cc6399,
+    type: 3}
+  m_PrefabInstance: {fileID: 1241350704798853435}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1781904500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781904498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377027becba0f1c4fa6ddb3dcd398ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabMonster:
+  - {fileID: 1091675122599852880, guid: 232994fa18af9a045bbd05f70361af68, type: 3}
+  - {fileID: 2861764358981892076, guid: 26f7e415e82932a4da3302fe8c2f61a2, type: 3}
+  - {fileID: 4712137852049642319, guid: 18cec8ba04ca544438aa2b3ea0db5bee, type: 3}
+  _timeSpawn: 10
+  _limitCountSpawn: 2
 --- !u!108 &2122593986 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 2122593986, guid: 23cf016d72fc973448448bec5dcc93bd,
@@ -755,6 +782,38 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 310022494, guid: c8263cc0ff6746846b26169663cc6399, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 310022494, guid: c8263cc0ff6746846b26169663cc6399, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771156811, guid: c8263cc0ff6746846b26169663cc6399, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771156811, guid: c8263cc0ff6746846b26169663cc6399, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 346089473, guid: c8263cc0ff6746846b26169663cc6399, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 346089473, guid: c8263cc0ff6746846b26169663cc6399, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 524378563, guid: c8263cc0ff6746846b26169663cc6399, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -20
+      objectReference: {fileID: 0}
+    - target: {fileID: 524378563, guid: c8263cc0ff6746846b26169663cc6399, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.02
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c8263cc0ff6746846b26169663cc6399, type: 3}
@@ -1055,5 +1114,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6323047796473196078, guid: fdb4404acbbe65f45be42bc4a9b4d004,
         type: 3}
+    - target: {fileID: 7935193724757016441, guid: 64d0cf84be6229747ad4acfc41618213,
+        type: 3}
+      propertyPath: _maxMonsterCount
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64d0cf84be6229747ad4acfc41618213, type: 3}

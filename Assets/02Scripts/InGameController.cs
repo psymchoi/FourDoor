@@ -21,12 +21,20 @@ public class InGameController : MonoBehaviour
     [SerializeField] GameObject[] _itemList;
     [SerializeField] Light[] _candleLight;
 
+    MonsterSpawnControl[] _ctrlSpawn;
+
     eGameState _curGameState;
+    bool _isSpawn;
+    int _maxMonsterCount;
 
     public eGameState NOWGAMESTATE
     {
         get { return _curGameState; }
         set { _curGameState = value; }
+    }
+    public bool ENABLESPAWN
+    {
+        get { return _isSpawn; }
     }
 
     // Start is called before the first frame update
@@ -65,12 +73,31 @@ public class InGameController : MonoBehaviour
         Transform tf = GameObject.FindGameObjectWithTag("CameraPosRoot").transform;
         Camera.main.GetComponent<ActionCamera>().SetCaemraActionRoot(tf);
 
+        // 스폰 포인트 활성화 및 몬스터스폰 최대마리 수.
+        _ctrlSpawn = FindObjectsOfType<MonsterSpawnControl>();
+        _isSpawn = true;
+        _maxMonsterCount = 6;
+
         // 촛대 밝기 상태
-        for(int n = 0; n < _candleLight.Length; n++)
+        for (int n = 0; n < _candleLight.Length; n++)
         {
             _candleLight[n].range = 0f;
         }
 
         // 레코드판 및 피아노맨
+    }
+
+    public void CheckCountMonster()
+    {
+        int tCount = 0;
+        for(int n = 0; n < _ctrlSpawn.Length; n++)
+        {
+            tCount += _ctrlSpawn[n].CurMonsterCount;
+        }
+
+        if (tCount >= _maxMonsterCount)
+            _isSpawn = false;
+        else
+            _isSpawn = true;
     }
 }

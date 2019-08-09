@@ -33,11 +33,13 @@ public class SelectionManger : MonoBehaviour
                         if (_onClick[n])
                         {
                             selectionRenderer.material = highlightMaterial[2];
+                            _door[n].tag = "Nothing";
                             break;
                         }
                         else
                         {
                             selectionRenderer.material = defaultMaterial[0];
+                            _door[n].tag = selectableTag[0];
                             break;
                         }
                     }
@@ -87,7 +89,7 @@ public class SelectionManger : MonoBehaviour
                             Debug.Log(_onClick[n]);
                             if (_onClick[n])
                             {
-                                selectionRenderer.material = highlightMaterial[2];      // 투명 Material.
+                                selectionRenderer.material = highlightMaterial[2];      
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.DOOR_OPEN);
                                 selection = null;
                                 break;

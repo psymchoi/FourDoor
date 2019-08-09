@@ -12,6 +12,7 @@ TagManager:
   - Selectable
   - MonsterRoamRoot
   - SelectableShop
+  - Nothing
   layers:
   - Default
   - TransparentFX

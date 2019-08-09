@@ -74,7 +74,7 @@ Material:
     - _SrcBlend: 1
     - _UVSec: 0
     - _XRayInside: 0.516
-    - _XRayRimSize: 0.357
+    - _XRayRimSize: 0.709
     - _ZWrite: 1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
