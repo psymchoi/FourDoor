@@ -69,148 +69,156 @@ public class PlayerController : MonoBehaviour
             _mov = new Vector3(MoveX, 0, MoveZ);
             _mov = (_mov.magnitude > 1) ? _mov.normalized : _mov;
 
-            if(Input.GetKeyDown(KeyCode.Alpha1))
-            {
-                _equipLantern = !_equipLantern;
-                if (_equipLantern)
-                {
-                    _timeCheck = 0;
-                    _lantern.SetActive(true);
-                    SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_ON);
-                }
-                else
-                {
-                    _timeCheck = 0;
-                    _lantern.SetActive(false);
-                    SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_OFF);
-                }
-            }
+            PlayerAniAction();
 
-            if(_equipLantern)
-            {// 랜턴을 들 때..
-                _timeCheck += Time.deltaTime;
-                if (MoveX == 0 && MoveZ == 0)
-                {// wsad값이 없는경우
-                    if (MoveX != 0)
-                    {// 회전ad값이 있는경우     =>  걷는 모션;
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-                            ChangedAction(ePlyAction.LANTERN_JUMP);
-                        }
-                        else
-                        {
-                            ChangedAction(ePlyAction.LANTERN_WALK);
-                        }
+            Cursor.lockState = CursorLockMode.Locked;
+            RotateCamera();  
+        }
+    }
+
+    /// <summary>
+    /// 플레이어 Animations 동작..
+    /// </summary>
+    public void PlayerAniAction()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {// 숫자 1을 눌렀을 때..
+            _equipLantern = !_equipLantern;
+            if (_equipLantern)
+            {// 런턴 ON
+                _timeCheck = 0;
+                _lantern.SetActive(true);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_ON);
+            }
+            else
+            {// 랜턴 OFF
+                _timeCheck = 0;
+                _lantern.SetActive(false);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_OFF);
+            }
+        }
+
+        if (_equipLantern)
+        {// 랜턴을 들 때..
+            _timeCheck += Time.deltaTime;
+            if (MoveX == 0 && MoveZ == 0)
+            {// wsad값이 없는경우
+                if (MoveX != 0)
+                {// 회전ad값이 있는경우     =>  걷는 모션
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {// 점프
+                        ChangedAction(ePlyAction.LANTERN_JUMP);
                     }
                     else
-                    {// 회전ad값이 없는경우     =>  가만히 있는 모션;
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-                            ChangedAction(ePlyAction.LANTERN_JUMP);
-                        }
-                        else
-                        {
-                            if (_timeCheck >= 0.2f)
-                                ChangedAction(ePlyAction.LANTERN_IDLE_STANDING);
-                            else
-                                ChangedAction(ePlyAction.EQUIP_LANTERN);
-                        }
+                    {// 걷기
+                        ChangedAction(ePlyAction.LANTERN_WALK);
                     }
                 }
                 else
-                {// ws값이 있는경우
-                    if (Input.GetKey(KeyCode.LeftShift))
-                    {// 달리고 있을 때
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-                            ChangedAction(ePlyAction.LANTERN_JUMP);
-                        }
-                        else
-                        {// shift키와 w키가 눌렸을 때       =>  달리는 모션
-                            if (_timeCheck >= 0.2f)
-                                ChangedAction(ePlyAction.LANTERN_RUN);
-                            else
-                                ChangedAction(ePlyAction.EQUIP_LANTERN);
-                        }
+                {// 회전ad값이 없는경우     =>  가만히 있는 모션
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {// 점프
+                        ChangedAction(ePlyAction.LANTERN_JUMP);
                     }
                     else
-                    {// 안달리고 있을 때
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-                            ChangedAction(ePlyAction.LANTERN_JUMP);
-                        }
+                    {
+                        if (_timeCheck >= 0.2f)
+                            ChangedAction(ePlyAction.LANTERN_IDLE_STANDING);
                         else
-                        {// shift키와 w키가 눌렸을 때       =>  달리는 모션
-                            if (_timeCheck >= 0.2f)
-                                ChangedAction(ePlyAction.LANTERN_WALK);
-                            else
-                                ChangedAction(ePlyAction.EQUIP_LANTERN);
-                        }
+                            ChangedAction(ePlyAction.EQUIP_LANTERN);
                     }
                 }
             }
             else
-            {// 랜턴을 안들때..
-                if (MoveX == 0 && MoveZ == 0)
-                {// wsad값이 없는경우
-                    if(MoveX != 0)
-                    {// 회전ad값이 있는경우     =>  걷는 모션;
-                        _timeCheck = 0;
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-                            ChangedAction(ePlyAction.LANTERN_JUMP);
-                        }
-                        else
-                        {
-                            ChangedAction(ePlyAction.NOTHING_WALK);
-                        }
+            {// ws값이 있는경우
+                if (Input.GetKey(KeyCode.LeftShift))
+                {// shift키와 w키가 눌렸을 때
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {// 점프
+                        ChangedAction(ePlyAction.LANTERN_JUMP);
                     }
                     else
-                    {// 회전ad값이 없는경우     =>  가만히 있는 모션;
-                        _timeCheck += Time.deltaTime;
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-                            ChangedAction(ePlyAction.NOTHING_JUMP);
-                        }
+                    {// 달리기 및 랜턴장착모션
+                        if (_timeCheck >= 0.2f)
+                            ChangedAction(ePlyAction.LANTERN_RUN);
                         else
-                        {
-                            if (_timeCheck >= 2.5f)
-                                ChangedAction(ePlyAction.NOTHING_IDLE_AROUND);
-                            else
-                                ChangedAction(ePlyAction.NOTHING_IDLE_STANDING);
-                        }
+                            ChangedAction(ePlyAction.EQUIP_LANTERN);
                     }
                 }
                 else
-                {// ws값이 있는경우
-                    _timeCheck = 0;
-                    if(Input.GetKey(KeyCode.LeftShift))
-                    {
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-                            ChangedAction(ePlyAction.NOTHING_JUMP);
-                        }
-                        else
-                        {// shift키와 w키가 눌렸을 때       =>  달리는 모션;
-                            ChangedAction(ePlyAction.NOTHING_RUN);                    
-                        }
+                {// 안달리고 있을 때
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {// 점프
+                        ChangedAction(ePlyAction.LANTERN_JUMP);
                     }
                     else
-                    { // 걷는모션;
-                        if (Input.GetKeyDown(KeyCode.Space))
-                        {
-                            ChangedAction(ePlyAction.NOTHING_JUMP);
-                        }
+                    {// 걷기 및 랜턴장착모션
+                        if (_timeCheck >= 0.2f)
+                            ChangedAction(ePlyAction.LANTERN_WALK);
                         else
-                        {// shift키와 w키가 눌렸을 때       =>  달리는 모션;
-                            ChangedAction(ePlyAction.NOTHING_WALK);
-                        }        
+                            ChangedAction(ePlyAction.EQUIP_LANTERN);
                     }
                 }
             }
-
-            Cursor.lockState = CursorLockMode.Locked;
-            RotateCamera();  
+        }
+        else
+        {// 랜턴을 안들때..
+            if (MoveX == 0 && MoveZ == 0)
+            {// wsad값이 없는경우
+                if (MoveX != 0)
+                {// 회전ad값이 있는경우     =>  걷는 모션
+                    _timeCheck = 0;
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        ChangedAction(ePlyAction.LANTERN_JUMP);
+                    }
+                    else
+                    {
+                        ChangedAction(ePlyAction.NOTHING_WALK);
+                    }
+                }
+                else
+                {// 회전ad값이 없는경우     =>  가만히 있는 모션
+                    _timeCheck += Time.deltaTime;
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        ChangedAction(ePlyAction.NOTHING_JUMP);
+                    }
+                    else
+                    {
+                        if (_timeCheck >= 2.5f)
+                            ChangedAction(ePlyAction.NOTHING_IDLE_AROUND);
+                        else
+                            ChangedAction(ePlyAction.NOTHING_IDLE_STANDING);
+                    }
+                }
+            }
+            else
+            {// ws값이 있는경우
+                _timeCheck = 0;
+                if (Input.GetKey(KeyCode.LeftShift))
+                {
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        ChangedAction(ePlyAction.NOTHING_JUMP);
+                    }
+                    else
+                    {// shift키와 w키가 눌렸을 때       =>  달리는 모션;
+                        ChangedAction(ePlyAction.NOTHING_RUN);
+                    }
+                }
+                else
+                { // 걷는모션;
+                    if (Input.GetKeyDown(KeyCode.Space))
+                    {
+                        ChangedAction(ePlyAction.NOTHING_JUMP);
+                    }
+                    else
+                    {// shift키와 w키가 눌렸을 때       =>  달리는 모션;
+                        ChangedAction(ePlyAction.NOTHING_WALK);
+                    }
+                }
+            }
         }
     }
 

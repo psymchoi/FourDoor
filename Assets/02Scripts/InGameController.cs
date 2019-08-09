@@ -18,8 +18,7 @@ public class InGameController : MonoBehaviour
 
     [SerializeField] GameObject _prefabPlayer;
     [SerializeField] GameObject _plyStartPosition;
-    [SerializeField] GameObject _record;
-    [SerializeField] GameObject _pianoClown;
+    [SerializeField] GameObject[] _itemList;
     [SerializeField] Light[] _candleLight;
 
     eGameState _curGameState;
@@ -49,7 +48,6 @@ public class InGameController : MonoBehaviour
             case eGameState.START:
                 break;
         }
-        
     }
 
     public void GameReady()
@@ -74,7 +72,5 @@ public class InGameController : MonoBehaviour
         }
 
         // 레코드판 및 피아노맨
-        _record.SetActive(false);
-        _pianoClown.SetActive(false);
     }
 }

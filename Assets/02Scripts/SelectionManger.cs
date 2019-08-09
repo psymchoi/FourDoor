@@ -7,8 +7,15 @@ public class SelectionManger : MonoBehaviour
     [SerializeField] string[] selectableTag;
     [SerializeField] Material[] highlightMaterial;
     [SerializeField] Material[] defaultMaterial;
+    [SerializeField] GameObject[] _door;
 
     Transform _selection;
+    bool[] _onClick;
+
+    void Awake()
+    {
+        _onClick = new bool[_door.Length];    
+    }
 
     // Update is called once per frame
     void Update()
@@ -18,7 +25,24 @@ public class SelectionManger : MonoBehaviour
             var selectionRenderer = _selection.GetComponent<Renderer>();
 
             if (_selection.CompareTag("Selectable"))
-                selectionRenderer.material = defaultMaterial[0];
+            {
+                for (int n = 0; n < _door.Length; n++)
+                {
+                    if (_selection.gameObject == _door[n])
+                    {
+                        if (_onClick[n])
+                        {
+                            selectionRenderer.material = highlightMaterial[2];
+                            break;
+                        }
+                        else
+                        {
+                            selectionRenderer.material = defaultMaterial[0];
+                            break;
+                        }
+                    }
+                }
+            }
             else if (_selection.CompareTag("SelectableShop"))
                 selectionRenderer.material = defaultMaterial[1];
 
@@ -35,7 +59,47 @@ public class SelectionManger : MonoBehaviour
                 var selectionRenderer = selection.GetComponent<Renderer>();
                 if (selectionRenderer != null)
                 {
-                    selectionRenderer.material = highlightMaterial[0];      // 기본 Material.
+                    for (int n = 0; n < _door.Length; n++)
+                    {
+                        if (selection.gameObject == _door[n])
+                        {
+                            if (_onClick[n])
+                            {
+                                selectionRenderer.material = highlightMaterial[3];      
+                                break;
+                            }
+                            else
+                            {
+                                selectionRenderer.material = highlightMaterial[0];      
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                if(Input.GetMouseButtonDown(0))
+                {// 왼쪽 마우스 버튼이 눌렸을 때
+                    for(int n = 0; n < _door.Length; n++)
+                    {
+                        if(selection.gameObject == _door[n])
+                        {
+                            _onClick[n] = !_onClick[n];
+                            Debug.Log(_onClick[n]);
+                            if (_onClick[n])
+                            {
+                                selectionRenderer.material = highlightMaterial[2];      // 투명 Material.
+                                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.DOOR_OPEN);
+                                selection = null;
+                                break;
+                            }
+                            else
+                            {
+                                selectionRenderer.material = highlightMaterial[2];
+                                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.DOOR_CLOSE);
+                                break;
+                            }
+                        }
+                    }
                 }
                 _selection = selection;
             }
