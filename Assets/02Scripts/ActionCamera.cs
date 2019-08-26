@@ -15,7 +15,6 @@ public class ActionCamera : MonoBehaviour
     [SerializeField] float _movSpeed;
     [SerializeField] float _rotSpeed;
     [SerializeField] Vector3 _followOffset;
-    [SerializeField] GameObject _selectionPoint;
 
     Transform _tfRootPos;
     Transform _posPlayer;
@@ -32,7 +31,9 @@ public class ActionCamera : MonoBehaviour
     void Start()
     {
         _ltPositions = new List<Vector3>();
-        _selectionPoint.SetActive(false);
+
+        Transform tf = GameObject.FindGameObjectWithTag("CameraPosRoot").transform;
+        Camera.main.GetComponent<ActionCamera>().SetCaemraActionRoot(tf);
     }
 
     // Update is called once per frame
@@ -70,8 +71,7 @@ public class ActionCamera : MonoBehaviour
                     transform.position = tp;
                     transform.LookAt(_lookPos);
                     _cameraState = eStateCamera.FOLLOW;
-                    InGameController._uniqueInstance.NOWGAMESTATE = InGameController.eGameState.PLAY;
-                    _selectionPoint.SetActive(true);
+                    InGameController._uniqueInstance.NOWGAMESTATE = InGameController.eGameState.START;
                 }
                 break;
             case eStateCamera.FOLLOW:
@@ -81,23 +81,24 @@ public class ActionCamera : MonoBehaviour
                 _posGoal = _posPlayer.position 
                     - (rot * Vector3.forward * _followOffset.z) + (Vector3.up * _followOffset.y);
 
+                // 이것을 해준 이유는 카메라 이동에따른 캐릭터프리팹과 카메라의 겹침 현상을 없애기 위해서이다.
                 if(PlayerController._uniqueInstance.PLAYERACTION == PlayerController.ePlyAction.LANTERN_RUN)
-                {
+                {// 플레이어가 랜턴을 들고 달릴 때
                     transform.position = Vector3.MoveTowards(transform.position, _posGoal -
                         (rot * Vector3.forward * _followOffset.z * 3.5f), 2 * _movSpeed * Time.deltaTime);               
                 }
                 else if(PlayerController._uniqueInstance.PLAYERACTION == PlayerController.ePlyAction.LANTERN_JUMP
                     || PlayerController._uniqueInstance.PLAYERACTION == PlayerController.ePlyAction.NOTHING_JUMP)
-                {
+                {// 플레이어가 랜턴을 들때와 안뜰때 점프
                     transform.position = Vector3.MoveTowards(transform.position, _posGoal +
                         (rot * Vector3.up * _followOffset.y * 3.5f), 10 * _movSpeed * Time.deltaTime);
                 }
                 else
-                {
+                {// 플레이어의 나머지 행동
                     transform.position = Vector3.MoveTowards(transform.position, _posGoal, 2 * _movSpeed * Time.deltaTime);
                 }
-              
-                transform.LookAt(_lookPos);
+                
+                //transform.LookAt(_lookPos);
                 break;
         }
     }

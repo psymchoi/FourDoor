@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310022493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 19.97}
+  m_LocalPosition: {x: 0.02, y: 0, z: 23.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6648951260576256612}
@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 346089472}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.02, y: 0, z: -19.95}
+  m_LocalPosition: {x: 0.02, y: 0, z: -23.9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6648951260576256612}
@@ -84,7 +84,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 524378562}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.94, y: 0, z: 0.02}
+  m_LocalPosition: {x: -23.4, y: 0, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6648951260576256612}
@@ -114,7 +114,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771156810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 19.89, y: 0, z: -0}
+  m_LocalPosition: {x: 22.8, y: 0, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6648951260576256612}
@@ -346,6 +346,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6648951260576256612}
+  - component: {fileID: 1781904500}
   m_Layer: 0
   m_Name: MonsterSpawnPosition
   m_TagString: MonsterRoamRoot
@@ -371,3 +372,19 @@ Transform:
   m_Father: {fileID: 1241350705843832107}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1781904500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4876753475068572172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 377027becba0f1c4fa6ddb3dcd398ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefabMonster:
+  - {fileID: 1091675122599852880, guid: 232994fa18af9a045bbd05f70361af68, type: 3}
+  - {fileID: 2861764358981892076, guid: 26f7e415e82932a4da3302fe8c2f61a2, type: 3}
+  - {fileID: 4712137852049642319, guid: 18cec8ba04ca544438aa2b3ea0db5bee, type: 3}

@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
 
     float MoveX;
     float MoveZ;
+    float xAxisClamp = 0;
     float _timeCheck;
     bool _isDead;
     bool _equipLantern;
@@ -230,6 +231,8 @@ public class PlayerController : MonoBehaviour
         float rotAmountX = _mouseX * mouseSensitivity;
         float rotAmountY = _mouseY * mouseSensitivity;
 
+        xAxisClamp -= rotAmountY;
+
         Vector3 rotPlayeArms = playerArms.transform.rotation.eulerAngles;
         Vector3 rotPlayer = player.transform.rotation.eulerAngles;
 
@@ -237,17 +240,30 @@ public class PlayerController : MonoBehaviour
         rotPlayeArms.z = 0;
         rotPlayer.y += rotAmountX;
 
+        if(xAxisClamp > 90)
+        {
+            xAxisClamp = 90;
+            rotPlayeArms.x = 90;
+        }
+        else if(xAxisClamp < -90)
+        {
+            xAxisClamp = -90;
+            rotPlayeArms.x = 270;
+        }
+
         playerArms.rotation = Quaternion.Euler(rotPlayeArms);
         player.rotation = Quaternion.Euler(rotPlayer);
     }
 
-    void ChangedAction(ePlyAction state)
+    public void ChangedAction(ePlyAction state)
     {
         if (_isDead)
             return;
 
         switch(state)
         {
+            case ePlyAction.NOTHING_IDLE_STANDING:
+                break;
             case ePlyAction.NOTHING_WALK:
                 transform.Translate(_mov * walkSpeed * Time.deltaTime);
                 break;
@@ -281,7 +297,7 @@ public class PlayerController : MonoBehaviour
         {
             _mov = Vector3.zero;
         }
-        else
+        //else
         {
             // _mov = Vector3.forward;
            // _mov = new Vector3(MoveX, 0, MoveZ);

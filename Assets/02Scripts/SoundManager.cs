@@ -19,9 +19,12 @@ public class SoundManager : MonoBehaviour
         DOOR_CLOSE,
         SHOP_OPEN,
         SHOP_CLOSE,
-        DOOR_TryOPEN_KNOCK,
+        CLOWN_TryOPEN_KNOCK,
+        CLOWN_DIE_SCREAM,
         ZOMBIE_SCREAM,
-        CLOWN_SCREAM,
+        ZOMBIE_DIE_SCREAM,
+        GHOST_DIE_SCREAM,
+        MATCHES_SOUND,
     }
 
     public static SoundManager _uniqueInstance;

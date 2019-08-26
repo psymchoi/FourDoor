@@ -43,8 +43,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1b1f1c2925a6ce449ebca51cf4cb59e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectableTag: Selectable
+  selectableTag:
+  - Selectable
+  - SelectableShop
+  - Nothing
+  - Item
+  - Light
   highlightMaterial:
   - {fileID: 2100000, guid: 3d9fa6ac54442d74ebdf8a3b19205a0b, type: 2}
   - {fileID: 2100000, guid: 42fc1c93b64aea843a1dff5e7059b086, type: 2}
-  defaultMaterial: {fileID: 2100000, guid: 08f42fbfe6bb3d4449245131e3347c71, type: 2}
+  - {fileID: 2100000, guid: 8a11d189ee33b7c4ea919fab8a53287a, type: 2}
+  - {fileID: 2100000, guid: a3f91d85384e68b42b18ebb65933554a, type: 2}
+  - {fileID: 2100000, guid: 3e1a36e67ae5e444f9eb43523ba025ac, type: 2}
+  defaultMaterial:
+  - {fileID: 2100000, guid: 08f42fbfe6bb3d4449245131e3347c71, type: 2}
+  - {fileID: 2100000, guid: b9885eb7867a21e49abc66f498a62775, type: 2}
+  - {fileID: 2100000, guid: 85474f0803da3114488a27d4d77397cc, type: 2}
+  - {fileID: 2100000, guid: aad3eb496210016488cb161ec1d2e0c0, type: 2}
+  - {fileID: 2100000, guid: b023d6ed877ad1a4ea7fb3dc204e2a30, type: 2}
+  - {fileID: 2100000, guid: bf80ee0faf1362b4189318d40787e497, type: 2}
+  _door:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _item:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _itemActive:
+  - {fileID: 0}
+  - {fileID: 0}
+  _candleLight:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _gameExplain: {fileID: 0}

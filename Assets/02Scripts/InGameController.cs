@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InGameController : MonoBehaviour
 {
@@ -8,8 +9,10 @@ public class InGameController : MonoBehaviour
     {
         NONE,
         READY,
+        MAPSETTING,
         START,
         PLAY,
+        NEXT_STAGE,
         END,
         RESULT,
     }
@@ -19,13 +22,22 @@ public class InGameController : MonoBehaviour
     [SerializeField] GameObject _prefabPlayer;
     [SerializeField] GameObject _plyStartPosition;
     [SerializeField] GameObject[] _itemList;
+    [SerializeField] Text _leftTimeTxt;
+    [SerializeField] Text _crystalTxt;
+    [SerializeField] Text _gameState;
     [SerializeField] Light[] _candleLight;
+    [SerializeField] Light _crystal;
 
     MonsterSpawnControl[] _ctrlSpawn;
 
     eGameState _curGameState;
     bool _isSpawn;
+    float _timeCheck;
+    float _leftTimes;
+    int _crysltalLevel;
     int _maxMonsterCount;
+    int _doorCount;
+    int _limitDoorCount;
 
     public eGameState NOWGAMESTATE
     {
@@ -36,12 +48,39 @@ public class InGameController : MonoBehaviour
     {
         get { return _isSpawn; }
     }
+    public int DOORCOUNT
+    {
+        get { return _doorCount; }
+        set { _doorCount = value; }
+    }
+    public int LIMITDOORCOUNT
+    {
+        get { return _limitDoorCount; }
+        set { _limitDoorCount = value; }
+    }
+    public float TIMECHECK
+    {
+        get { return _timeCheck; }
+        set { _timeCheck = value; }
+    }
+    public Text GAMESTATE
+    {
+        get { return _gameState; }
+        set { _gameState = value; }
+    }
+    public Light[] CANDLELIGHT
+    {
+        get { return _candleLight; }
+        set { _candleLight = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
         _uniqueInstance = this;
         _curGameState = eGameState.READY;
+
+        SoundManager._uniqueInstance.PlayBGMSound(SoundManager.eBGMType.INGAME);
     }
 
     // Update is called once per frame
@@ -54,6 +93,44 @@ public class InGameController : MonoBehaviour
                 GameMapSetting();
                 break;
             case eGameState.START:
+                _timeCheck += Time.deltaTime;
+                _gameState.text = "GameStart!";
+                if(_timeCheck >= 1.5f)
+                {
+                    _timeCheck = 0;
+                    _gameState.gameObject.SetActive(false);
+                    _curGameState = eGameState.PLAY;
+                }
+                break;
+            case eGameState.PLAY:
+                _timeCheck += Time.deltaTime;
+                _leftTimes -= Time.deltaTime;
+                _leftTimeTxt.text = _leftTimes.ToString("N1");
+
+                if (_timeCheck >= 0 && _timeCheck < 40)
+                {
+                    _crystal.range = 1.0f;
+                    _crysltalLevel = 1;
+                    _crystalTxt.text = string.Format("Crystal.Lv : {0}\t[{1}]", _crysltalLevel, _timeCheck.ToString("N0"));
+                }
+                else if(_timeCheck >= 40 && _timeCheck < 100)
+                {
+                    _crystal.range = 6.0f;
+                    _crysltalLevel = 2;
+                    _crystalTxt.text = string.Format("Crystal.Lv : {0}\t[1}]", _crysltalLevel, _timeCheck.ToString("N0"));
+                }
+                else if(_timeCheck >= 100)
+                {
+                    _crystal.range = 20.0f;
+                    _crysltalLevel = 3;
+                    _crystalTxt.text = string.Format("Crystal.Lv : {0}\t[{1}]", _crysltalLevel, _timeCheck.ToString("N0"));
+                }
+
+                if(_leftTimes <= 0)
+                {
+                    _timeCheck = 60.0f;
+                    _curGameState = eGameState.NEXT_STAGE;
+                }
                 break;
         }
     }
@@ -61,29 +138,40 @@ public class InGameController : MonoBehaviour
     public void GameReady()
     {
         _curGameState = eGameState.READY;
+        _gameState.text = "READY";
     }
 
     public void GameMapSetting()
     {
-        _curGameState = eGameState.START;
+        _curGameState = eGameState.MAPSETTING;
         // 플레이어 생성.
         GameObject go = Instantiate(_prefabPlayer, _plyStartPosition.transform.position, _plyStartPosition.transform.rotation);
-        
+        go.transform.parent = transform;
         // 카메라 워킹위치 세팅.
-        Transform tf = GameObject.FindGameObjectWithTag("CameraPosRoot").transform;
-        Camera.main.GetComponent<ActionCamera>().SetCaemraActionRoot(tf);
+        //Transform tf = GameObject.FindGameObjectWithTag("CameraPosRoot").transform;
+        //Camera.main.GetComponent<ActionCamera>().SetCaemraActionRoot(tf);
+
+        // 플레이시간
+        _leftTimes = 60.0f;
+        _leftTimeTxt.text = _leftTimes.ToString("N1");
 
         // 스폰 포인트 활성화 및 몬스터스폰 최대마리 수.
         _ctrlSpawn = FindObjectsOfType<MonsterSpawnControl>();
         _isSpawn = true;
         _maxMonsterCount = 6;
+        _doorCount = 0;
+        _limitDoorCount = 3;
 
-        // 촛대 밝기 상태
+        // 촛대 밝기 상태, 크리스탈 밝기 상태
         for (int n = 0; n < _candleLight.Length; n++)
         {
             _candleLight[n].range = 0f;
         }
+        _crystal.range = 1.0f;
 
+        // 크리스탈 레벨 = Money
+        _crysltalLevel = 1;
+        _crystalTxt.text = string.Format("Crystal.Lv : {0}\t[{1}]", _crysltalLevel, _timeCheck.ToString("N0"));
         // 레코드판 및 피아노맨
     }
 
