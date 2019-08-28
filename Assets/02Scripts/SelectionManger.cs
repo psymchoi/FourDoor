@@ -90,12 +90,12 @@ public class SelectionManger : MonoBehaviour
                         }
                     }
                 }
-                else if (_selection.CompareTag("SelectableShop"))
+                else if (_selection.CompareTag(selectableTag[2]))
                 {// 상점.
                     selectionRenderer.material = defaultMaterial[1];
                     _gameExplain.text = "";
                 }
-                else if (_selection.CompareTag("Item"))
+                else if (_selection.CompareTag(selectableTag[3]))
                 {// 아이템.
                     if (_selection.gameObject == _item[0])
                     {// 샷건
@@ -111,8 +111,8 @@ public class SelectionManger : MonoBehaviour
                     }
                     //selectionRenderer.material = defaultMaterial[4];
                 }
-                else if (_selection.CompareTag("Light"))
-                {
+                else if (_selection.CompareTag(selectableTag[4]))
+                {// 촛대.
                     for(int n = 0; n < _candleLight.Length; n++)
                     {
                         if(_selection.gameObject == _candleLight[n])
@@ -121,6 +121,10 @@ public class SelectionManger : MonoBehaviour
                             break;
                         }
                     }
+                }
+                else if (_selection.CompareTag(selectableTag[5]))
+                {// 베개
+                    _gameExplain.text = "";
                 }
                 _selection = null;
             }
@@ -246,7 +250,7 @@ public class SelectionManger : MonoBehaviour
                     }
                     _selection = selection;
                 }
-                else if (selection.CompareTag("SelectableShop"))
+                else if (selection.CompareTag(selectableTag[2]))
                 {// 상점
                     var selectionRenderer = selection.GetComponent<Renderer>();
                     if (selectionRenderer != null)
@@ -256,7 +260,7 @@ public class SelectionManger : MonoBehaviour
                     }
                     _selection = selection;
                 }
-                else if (selection.CompareTag("Item"))
+                else if (selection.CompareTag(selectableTag[3]))
                 {
                     var selectionRenderer = selection.GetComponent<Renderer>();
                     if (selectionRenderer != null)
@@ -268,7 +272,13 @@ public class SelectionManger : MonoBehaviour
                     {
                         if(selection.gameObject == _item[0])
                         {// 샷건 90
-                            if(InGameController._uniqueInstance.TIMECHECK >= 1)
+                            if (_timeBought[0])
+                            {
+                                _gameExplain.text = "이미 소지하고 있다.";
+                                return;
+                            }
+
+                            if (InGameController._uniqueInstance.TIMECHECK >= 1)
                             {
                                 _timeBought[0] = true;
                                 _item[0].SetActive(false);
@@ -278,68 +288,56 @@ public class SelectionManger : MonoBehaviour
                             }
                             else
                             {
-                                if (_timeBought[0])
-                                {
-                                    _gameExplain.text = "이미 소지하고 있다.";
-                                    return;
-                                }
-                                else
-                                {
-                                    _gameExplain.text = "크리스탈이 부족합니다..";
-                                    return;
-                                }
+                                _gameExplain.text = "크리스탈이 부족합니다..";
+                                return;
                             }
                         }
                         else if(selection.gameObject == _item[1])
                         {// 레코드 50
-                            if(InGameController._uniqueInstance.TIMECHECK >= 50)
+                            if (_timeBought[1])
+                            {
+                                _gameExplain.text = "이미 소지하고 있다.";
+                                return;
+                            }
+
+                            if (InGameController._uniqueInstance.TIMECHECK >= 5)
                             {
                                 _timeBought[1] = true;
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.BTN);
-                                InGameController._uniqueInstance.TIMECHECK -= 50;
+                                InGameController._uniqueInstance.TIMECHECK -= 5;
                                 _itemActive[0].SetActive(true);
                             }
                             else
                             {
-                                if (_timeBought[1])
-                                {
-                                    _gameExplain.text = "이미 소지하고 있다.";
-                                    return;
-                                }
-                                else
-                                {
-                                    _gameExplain.text = "크리스탈이 부족합니다..";
-                                    return;
-                                }
+                                _gameExplain.text = "크리스탈이 부족합니다..";
+                                return;                             
                             }
                         }
                         else if(selection.gameObject == _item[2])
                         {// 피아노 100
-                            if (InGameController._uniqueInstance.TIMECHECK >= 100)
+                            if (_timeBought[2])
+                            {
+                                _gameExplain.text = "이미 소지하고 있다.";
+                                return;
+                            }
+
+                            if (InGameController._uniqueInstance.TIMECHECK >= 10)
                             {
                                 _timeBought[2] = true;
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.BTN);
-                                InGameController._uniqueInstance.TIMECHECK -= 100;
+                                InGameController._uniqueInstance.TIMECHECK -= 10;
                                 _itemActive[1].SetActive(true);
                             }
                             else
                             {
-                                if (_timeBought[2])
-                                {
-                                    _gameExplain.text = "이미 소지하고 있다.";
-                                    return;
-                                }
-                                else
-                                {
-                                    _gameExplain.text = "크리스탈이 부족합니다..";
-                                    return;
-                                }
+                                _gameExplain.text = "크리스탈이 부족합니다..";
+                                return;
                             }
                         }
                     }
                     _selection = selection;
                 }
-                else if(selection.CompareTag("Light"))
+                else if (selection.CompareTag(selectableTag[4]))
                 {
                     var selectionRenderer = selection.GetComponent<Renderer>();
                     if (selectionRenderer != null)
@@ -349,20 +347,30 @@ public class SelectionManger : MonoBehaviour
 
                     if (Input.GetMouseButtonDown(1))
                     {
-                        if(InGameController._uniqueInstance.TIMECHECK >= 10)
+                        if(InGameController._uniqueInstance.TIMECHECK >= 1)
                         {
                             for (int n = 0; n < _candleLight.Length; n++)
                             {
                                 if(selection.gameObject == _candleLight[n])
                                 {
                                     SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.MATCHES_SOUND);
-                                    InGameController._uniqueInstance.TIMECHECK -= 10;
+                                    InGameController._uniqueInstance.TIMECHECK -= 1;
                                     InGameController._uniqueInstance.CANDLELIGHT[n].range += 1.5f;
-                                    break;
+                                    return;
                                 }
                             }
                         }
+                        else
+                        {
+                            _gameExplain.text = "크리스탈이 부족합니다.";
+                            return;
+                        }
                     }
+                    _selection = selection;
+                }
+                else if (selection.CompareTag(selectableTag[5]))
+                {
+                    _gameExplain.text = "잠이나 자고싶다..";
                     _selection = selection;
                 }
             }

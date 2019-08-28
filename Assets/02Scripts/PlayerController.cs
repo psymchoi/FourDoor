@@ -31,9 +31,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float mouseSensitivity;
-    [SerializeField] Transform player, playerArms;
+    [SerializeField] Transform player;
 
     Animator _aniCtrl;
+    Transform playerArms;
     ePlyAction _curAction;
     Vector3 _mov;
 
@@ -62,6 +63,8 @@ public class PlayerController : MonoBehaviour
         _shotgun.SetActive(false);
         _equipLantern = false;
         _equipShotgun = false;
+
+        playerArms = GameObject.FindGameObjectWithTag("MainCamera").transform;
     }
 
     // Update is called once per frame
@@ -74,14 +77,14 @@ public class PlayerController : MonoBehaviour
         {
             MoveX = Input.GetAxis("Horizontal");      // a, d
             MoveZ = Input.GetAxis("Vertical");        // w, s          
-            
+
             _mov = new Vector3(MoveX, 0, MoveZ);
-            _mov = (_mov.magnitude > 1) ? _mov.normalized : _mov;
+            _mov = (_mov.magnitude > 1) ? Vector3.zero : _mov;
 
             PlayerAniAction();
 
             Cursor.lockState = CursorLockMode.Locked;
-            RotateCamera();  
+            RotateCamera();
         }
     }
 
@@ -90,13 +93,13 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void PlayerAniAction()
     {
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {// 랜턴 들기 = 1번 키
             if (_equipShotgun)
                 _equipShotgun = !_equipShotgun;
 
             _equipLantern = !_equipLantern;
-            if(_equipLantern)
+            if (_equipLantern)
             {// 랜턴 ON
                 _lantern.SetActive(true);
                 _shotgun.SetActive(false);
@@ -110,9 +113,9 @@ public class PlayerController : MonoBehaviour
                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_OFF);
             }
         }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
         {// 샷건 들기 = 2번 키
-            if(!SelectionManger._uniqueInstance.BOUGHT)
+            if (!SelectionManger._uniqueInstance.BOUGHT)
             {// 샷건 구입 여부(x)
                 return;
             }
@@ -125,7 +128,7 @@ public class PlayerController : MonoBehaviour
                 }
 
                 _equipShotgun = !_equipShotgun;
-                if(_equipShotgun)
+                if (_equipShotgun)
                 {// 샷건 ON
                     _shotgun.SetActive(true);
                     _lantern.SetActive(false);
@@ -140,11 +143,11 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        if(_equipLantern)
+        if (_equipLantern)
         {// 랜턴 들고 있을 때 행동.
-            if(MoveX == 0 && MoveZ == 0)
+            if (MoveX == 0 && MoveZ == 0)
             {// 아무 이동이 없을 경우.
-                if(MoveX != 0)
+                if (MoveX != 0)
                 {
                     ChangedAction(ePlyAction.LANTERN_WALK);
                 }
@@ -155,7 +158,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if(Input.GetKey(KeyCode.LeftShift))
+                if (Input.GetKey(KeyCode.LeftShift))
                 {// Space = 달리기
                     ChangedAction(ePlyAction.LANTERN_RUN);
                 }
@@ -165,9 +168,9 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if(_equipShotgun)
+        else if (_equipShotgun)
         {// 샷건 들고 있을 때 행동.
-            if(Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 ChangedAction(ePlyAction.RIFLE_FIRE);
                 return;
@@ -196,7 +199,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
         }
-        else if(!_equipLantern && !_equipShotgun)
+        else if (!_equipLantern && !_equipShotgun)
         {// 아무것도 들고 있지 않을 때 행동.
             if (MoveX == 0 && MoveZ == 0)
             {// 아무 이동이 없을 경우.
@@ -238,14 +241,14 @@ public class PlayerController : MonoBehaviour
 
         rotPlayeArms.x -= rotAmountY;
         rotPlayeArms.z = 0;
-        rotPlayer.y += rotAmountX;
+        rotPlayer.y = rotPlayeArms.y += rotAmountX;
 
-        if(xAxisClamp > 90)
+        if (xAxisClamp > 90)
         {
             xAxisClamp = 90;
             rotPlayeArms.x = 90;
         }
-        else if(xAxisClamp < -90)
+        else if (xAxisClamp < -90)
         {
             xAxisClamp = -90;
             rotPlayeArms.x = 270;
@@ -260,7 +263,7 @@ public class PlayerController : MonoBehaviour
         if (_isDead)
             return;
 
-        switch(state)
+        switch (state)
         {
             case ePlyAction.NOTHING_IDLE_STANDING:
                 break;
@@ -301,23 +304,7 @@ public class PlayerController : MonoBehaviour
         _curAction = state;
     }
 
-    /// <summary>
-    /// 벽에 부딪힐 시 뚫고 나가지않게하기 위해서..
-    /// </summary>
-    /// <param name="Collider"></param>
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Wall") || other.CompareTag("Selectable"))
-        {
-            _mov = Vector3.zero;
-        }
-        //else
-        {
-            // _mov = Vector3.forward;
-           // _mov = new Vector3(MoveX, 0, MoveZ);
-           //_mov = (_mov.magnitude > 1) ? _mov.normalized : _mov;
-        }
-    }
+  
 }
 
 

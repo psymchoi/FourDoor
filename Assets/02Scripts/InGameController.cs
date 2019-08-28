@@ -19,9 +19,11 @@ public class InGameController : MonoBehaviour
 
     public static InGameController _uniqueInstance;
 
+    [SerializeField] GameObject _mainCamera;
     [SerializeField] GameObject _prefabPlayer;
     [SerializeField] GameObject _plyStartPosition;
     [SerializeField] GameObject[] _itemList;
+    [SerializeField] GameObject _playImg;
     [SerializeField] Text _leftTimeTxt;
     [SerializeField] Text _crystalTxt;
     [SerializeField] Text _gameState;
@@ -71,6 +73,10 @@ public class InGameController : MonoBehaviour
     {
         get { return _candleLight; }
         set { _candleLight = value; }
+    }
+    public GameObject PLAYIMG
+    {
+        get { return _playImg; }
     }
 
     // Start is called before the first frame update
@@ -134,7 +140,7 @@ public class InGameController : MonoBehaviour
     public void GameReady()
     {
         _curGameState = eGameState.READY;
-        _gameState.text = "READY";
+        //_gameState.text = "READY";
     }
 
     public void GameMapSetting()
@@ -144,6 +150,7 @@ public class InGameController : MonoBehaviour
         GameObject go = Instantiate(_prefabPlayer, _plyStartPosition.transform.position, _plyStartPosition.transform.rotation);
         go.transform.parent = transform;
         // 카메라 워킹위치 세팅.
+        _mainCamera.SetActive(true);
         //Transform tf = GameObject.FindGameObjectWithTag("CameraPosRoot").transform;
         //Camera.main.GetComponent<ActionCamera>().SetCaemraActionRoot(tf);
 
@@ -167,6 +174,9 @@ public class InGameController : MonoBehaviour
 
         // 크리스탈 = Money
         _crystalTxt.text = string.Format("Crystal : {0}", _crstl.ToString("N0"));
+
+        // 조작법 이미지가 나온다.
+        _playImg.SetActive(true);
     }
 
     public void CheckCountMonster()

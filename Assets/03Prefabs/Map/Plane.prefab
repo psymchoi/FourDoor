@@ -150,10 +150,10 @@ GameObject:
   - component: {fileID: 319156131}
   - component: {fileID: 320122211}
   - component: {fileID: 329181795}
-  - component: {fileID: 959539444}
+  - component: {fileID: 223912408}
   m_Layer: 0
   m_Name: piano
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -232,8 +232,8 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
---- !u!135 &959539444
-SphereCollider:
+--- !u!65 &223912408
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -243,8 +243,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.2
-  m_Center: {x: 0.01605755, y: 0.040488243, z: 0.6090054}
+  m_Size: {x: 2.19, y: 1.14, z: 1.96}
+  m_Center: {x: 0.016060414, y: -0.39, z: 0.6090063}
 --- !u!1 &398123724
 GameObject:
   m_ObjectHideFlags: 0
@@ -1582,7 +1582,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 78892fc67b3ab3544b506bdba8998073, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.1
+  m_Volume: 0.05
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1677,10 +1677,10 @@ GameObject:
   - component: {fileID: 1745616848801484877}
   - component: {fileID: 1751449268836454065}
   - component: {fileID: 1757078386136568549}
-  - component: {fileID: 268080411}
+  - component: {fileID: 1837648580}
   m_Layer: 0
   m_Name: dfk_chair (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1693,7 +1693,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1743484495597789269}
   m_LocalRotation: {x: -0.23681138, y: -0.23681144, z: 0.66627353, w: 0.6662735}
-  m_LocalPosition: {x: 0.836, y: 0.07899993, z: 0.803}
+  m_LocalPosition: {x: 0.946, y: 0.07899993, z: 0.858}
   m_LocalScale: {x: 0.19999902, y: 0.19999905, z: 0.19999905}
   m_Children: []
   m_Father: {fileID: 590366847}
@@ -1744,8 +1744,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &268080411
-SphereCollider:
+--- !u!65 &1837648580
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1755,8 +1755,8 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.66068524
-  m_Center: {x: 0.0000006120014, y: 0.6452845, z: -0.028178291}
+  m_Size: {x: 0.60508364, y: 1.3213705, z: 4.18}
+  m_Center: {x: 0.0000006120014, y: 0.6452845, z: -0.02817853}
 --- !u!1 &1743484495620034574
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,7 +1771,7 @@ GameObject:
   - component: {fileID: 1011239629}
   m_Layer: 0
   m_Name: dfk_chair
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -1862,7 +1862,7 @@ GameObject:
   - component: {fileID: 2018571168}
   m_Layer: 0
   m_Name: dfk_chair (2)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -4210,7 +4210,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 1bbbe7812b62572408be05462a291d98, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.3
+  m_Volume: 0.15
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -4977,10 +4977,10 @@ GameObject:
   - component: {fileID: 4394115259458571009}
   - component: {fileID: 4362973049738724217}
   - component: {fileID: 4368781044429903093}
-  - component: {fileID: 4328545021581297691}
+  - component: {fileID: 55163187}
   m_Layer: 0
   m_Name: dfk_desk
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5045,8 +5045,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &4328545021581297691
-MeshCollider:
+--- !u!65 &55163187
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5055,10 +5055,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: ecd24e9dde1549a44a3782bbec27d009, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 1.3709606, y: 0.8265724, z: 0.85136676}
+  m_Center: {x: -0.00911653, y: 0.40988225, z: 0.059577763}
 --- !u!1 &4676296466151664745
 GameObject:
   m_ObjectHideFlags: 0
@@ -5073,7 +5072,7 @@ GameObject:
   - component: {fileID: 4613737400934365581}
   m_Layer: 0
   m_Name: Pillow.003
-  m_TagString: Untagged
+  m_TagString: Pillow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5165,7 +5164,7 @@ GameObject:
   - component: {fileID: 1413854363}
   m_Layer: 0
   m_Name: dfk_bed
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5534,7 +5533,7 @@ GameObject:
   - component: {fileID: 5016664767464846957}
   m_Layer: 0
   m_Name: dfk_chest
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5626,7 +5625,7 @@ GameObject:
   - component: {fileID: 5016664767268207577}
   m_Layer: 0
   m_Name: dfk_chest (1)
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -5700,7 +5699,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.31604052
+  m_Radius: 1.28
   m_Height: 1.0237745
   m_Direction: 0
   m_Center: {x: 0, y: 0, z: 0}
@@ -5715,6 +5714,7 @@ GameObject:
   - component: {fileID: 5168739671773349016}
   - component: {fileID: 5178248996224936432}
   - component: {fileID: 5185963425536457808}
+  - component: {fileID: 1857349124}
   m_Layer: 0
   m_Name: dfk_shelf (2)
   m_TagString: Untagged
@@ -5781,6 +5781,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1857349124
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164912119499670300}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000002, y: 0.23140006, z: 0.3000001}
+  m_Center: {x: 0.0000007151296, y: 0.023995375, z: -0.10356136}
 --- !u!1 &5164912119730801173
 GameObject:
   m_ObjectHideFlags: 0
@@ -5792,6 +5805,7 @@ GameObject:
   - component: {fileID: 5168739672616881553}
   - component: {fileID: 5178248995927744761}
   - component: {fileID: 5185963424761115993}
+  - component: {fileID: 1443536772}
   m_Layer: 0
   m_Name: dfk_shelf
   m_TagString: Untagged
@@ -5858,6 +5872,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1443536772
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164912119730801173}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000002, y: 0.23140009, z: 0.3000001}
+  m_Center: {x: -0.00000023845297, y: 0.023995366, z: -0.10356134}
 --- !u!1 &5164912120647643450
 GameObject:
   m_ObjectHideFlags: 0
@@ -5960,6 +5987,7 @@ GameObject:
   - component: {fileID: 5168739672730395031}
   - component: {fileID: 5178248995035139327}
   - component: {fileID: 5185963424581015903}
+  - component: {fileID: 514461500}
   m_Layer: 0
   m_Name: dfk_shelf (3)
   m_TagString: Untagged
@@ -6026,6 +6054,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &514461500
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164912120725644819}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 0.23140004, z: 0.3000001}
+  m_Center: {x: -7.3585267e-16, y: 0.023994897, z: -0.10356136}
 --- !u!1 &5164912120780066275
 GameObject:
   m_ObjectHideFlags: 0
@@ -6037,6 +6078,7 @@ GameObject:
   - component: {fileID: 5168739672793467495}
   - component: {fileID: 5178248995097896719}
   - component: {fileID: 5185963424518206127}
+  - component: {fileID: 1229911684}
   m_Layer: 0
   m_Name: dfk_shelf (1)
   m_TagString: Untagged
@@ -6103,6 +6145,19 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1229911684
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5164912120780066275}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0000001, y: 0.23140004, z: 0.3000001}
+  m_Center: {x: -7.3585267e-16, y: 0.023995075, z: -0.10356136}
 --- !u!1 &5718178212187072588
 GameObject:
   m_ObjectHideFlags: 0

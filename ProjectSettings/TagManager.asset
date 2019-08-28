@@ -15,6 +15,7 @@ TagManager:
   - Nothing
   - Item
   - Light
+  - Pillow
   layers:
   - Default
   - TransparentFX

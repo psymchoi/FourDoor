@@ -16,6 +16,7 @@ public class ActionCamera : MonoBehaviour
     [SerializeField] float _rotSpeed;
     [SerializeField] Vector3 _followOffset;
 
+    GameObject _ply;
     Transform _tfRootPos;
     Transform _posPlayer;
     Transform _lookPos;
@@ -39,7 +40,7 @@ public class ActionCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(_cameraState)
+        switch (_cameraState)
         {
             case eStateCamera.NONE:
                 // 2초 뒤에 카메라 동작..
@@ -72,6 +73,7 @@ public class ActionCamera : MonoBehaviour
                     transform.LookAt(_lookPos);
                     _cameraState = eStateCamera.FOLLOW;
                     InGameController._uniqueInstance.NOWGAMESTATE = InGameController.eGameState.START;
+                    InGameController._uniqueInstance.PLAYIMG.SetActive(false);
                 }
                 break;
             case eStateCamera.FOLLOW:
