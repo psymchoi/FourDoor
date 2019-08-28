@@ -367,6 +367,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Plane
       objectReference: {fileID: 0}
+    - target: {fileID: 810238380388727164, guid: 23cf016d72fc973448448bec5dcc93bd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4385881024263822822, guid: 23cf016d72fc973448448bec5dcc93bd,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -427,6 +432,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1377253526}
+    - target: {fileID: 1741694070335373107, guid: 23cf016d72fc973448448bec5dcc93bd,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777054276895442402, guid: 23cf016d72fc973448448bec5dcc93bd,
+        type: 3}
+      propertyPath: m_Volume
+      value: 0.15
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23cf016d72fc973448448bec5dcc93bd, type: 3}
 --- !u!1 &1688135519 stripped
@@ -832,6 +847,18 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ForPlayerUIFrame
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803303979, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
+      propertyPath: m_Color.r
+      value: 0.9395693
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803303979, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
+      propertyPath: m_Color.g
+      value: 0.9613785
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803303979, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
+      propertyPath: m_Color.b
+      value: 0.9622642
       objectReference: {fileID: 0}
     - target: {fileID: 7298686887023959341, guid: 554c767cecf02f842abe189dc955cb29,
         type: 3}

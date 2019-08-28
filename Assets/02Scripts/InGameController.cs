@@ -32,9 +32,8 @@ public class InGameController : MonoBehaviour
 
     eGameState _curGameState;
     bool _isSpawn;
-    float _timeCheck;
+    float _crstl;
     float _leftTimes;
-    int _crysltalLevel;
     int _maxMonsterCount;
     int _doorCount;
     int _limitDoorCount;
@@ -60,8 +59,8 @@ public class InGameController : MonoBehaviour
     }
     public float TIMECHECK
     {
-        get { return _timeCheck; }
-        set { _timeCheck = value; }
+        get { return _crstl; }
+        set { _crstl = value; }
     }
     public Text GAMESTATE
     {
@@ -80,7 +79,7 @@ public class InGameController : MonoBehaviour
         _uniqueInstance = this;
         _curGameState = eGameState.READY;
 
-        SoundManager._uniqueInstance.PlayBGMSound(SoundManager.eBGMType.INGAME);
+        //SoundManager._uniqueInstance.PlayBGMSound(SoundManager.eBGMType.INGAME);
     }
 
     // Update is called once per frame
@@ -93,44 +92,41 @@ public class InGameController : MonoBehaviour
                 GameMapSetting();
                 break;
             case eGameState.START:
-                _timeCheck += Time.deltaTime;
+                _crstl += Time.deltaTime;
                 _gameState.text = "GameStart!";
-                if(_timeCheck >= 1.5f)
+                if(_crstl >= 1.5f)
                 {
-                    _timeCheck = 0;
+                    _crstl = 0;
                     _gameState.gameObject.SetActive(false);
                     _curGameState = eGameState.PLAY;
                 }
                 break;
             case eGameState.PLAY:
-                _timeCheck += Time.deltaTime;
+                _crstl += Time.deltaTime;
                 _leftTimes -= Time.deltaTime;
                 _leftTimeTxt.text = _leftTimes.ToString("N1");
 
-                if (_timeCheck >= 0 && _timeCheck < 40)
+                if (_crstl >= 0 && _crstl < 40)
                 {
                     _crystal.range = 1.0f;
-                    _crysltalLevel = 1;
-                    _crystalTxt.text = string.Format("Crystal.Lv : {0}\t[{1}]", _crysltalLevel, _timeCheck.ToString("N0"));
+                    _crystalTxt.text = string.Format("Crystal : {0}", _crstl.ToString("N0"));
                 }
-                else if(_timeCheck >= 40 && _timeCheck < 100)
+                else if(_crstl >= 40 && _crstl < 100)
                 {
                     _crystal.range = 6.0f;
-                    _crysltalLevel = 2;
-                    _crystalTxt.text = string.Format("Crystal.Lv : {0}\t[1}]", _crysltalLevel, _timeCheck.ToString("N0"));
+                    _crystalTxt.text = string.Format("Crystal.Lv : {0}", _crstl.ToString("N0"));
                 }
-                else if(_timeCheck >= 100)
+                else if(_crstl >= 100)
                 {
                     _crystal.range = 20.0f;
-                    _crysltalLevel = 3;
-                    _crystalTxt.text = string.Format("Crystal.Lv : {0}\t[{1}]", _crysltalLevel, _timeCheck.ToString("N0"));
+                    _crystalTxt.text = string.Format("Crystal.Lv : {0}", _crstl.ToString("N0"));
                 }
 
-                if(_leftTimes <= 0)
-                {
-                    _timeCheck = 60.0f;
-                    _curGameState = eGameState.NEXT_STAGE;
-                }
+                //if(_leftTimes <= 0)
+                //{
+                //    _timeCheck = 60.0f;
+                //    _curGameState = eGameState.NEXT_STAGE;
+                //}
                 break;
         }
     }
@@ -169,10 +165,8 @@ public class InGameController : MonoBehaviour
         }
         _crystal.range = 1.0f;
 
-        // 크리스탈 레벨 = Money
-        _crysltalLevel = 1;
-        _crystalTxt.text = string.Format("Crystal.Lv : {0}\t[{1}]", _crysltalLevel, _timeCheck.ToString("N0"));
-        // 레코드판 및 피아노맨
+        // 크리스탈 = Money
+        _crystalTxt.text = string.Format("Crystal : {0}", _crstl.ToString("N0"));
     }
 
     public void CheckCountMonster()

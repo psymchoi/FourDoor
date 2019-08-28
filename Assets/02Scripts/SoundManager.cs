@@ -25,6 +25,9 @@ public class SoundManager : MonoBehaviour
         ZOMBIE_DIE_SCREAM,
         GHOST_DIE_SCREAM,
         MATCHES_SOUND,
+        SHOTGUN_EQUIP,
+        SHOTGUN_FIRE,
+        SHOTGUN_RELOADING,
     }
 
     public static SoundManager _uniqueInstance;

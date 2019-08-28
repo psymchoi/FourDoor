@@ -314,7 +314,7 @@ PrefabInstance:
     - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
         type: 3}
       propertyPath: _effClips.Array.size
-      value: 13
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
         type: 3}
@@ -360,6 +360,21 @@ PrefabInstance:
         type: 3}
       propertyPath: _effClips.Array.data[13]
       value: 
-      objectReference: {fileID: 8300000, guid: 78892fc67b3ab3544b506bdba8998073, type: 3}
+      objectReference: {fileID: 8300000, guid: d4cc453ab35d651418b54a4656a951eb, type: 3}
+    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
+        type: 3}
+      propertyPath: _effClips.Array.data[14]
+      value: 
+      objectReference: {fileID: 8300000, guid: b58a61f54412d974ea945e4c7dc36c06, type: 3}
+    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
+        type: 3}
+      propertyPath: _effClips.Array.data[15]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7e44a8561bfee6c48919b0c77be79cec, type: 3}
+    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
+        type: 3}
+      propertyPath: _effClips.Array.data[16]
+      value: 
+      objectReference: {fileID: 8300000, guid: 8605ae65ab269434f843b39479d4b302, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ad27a24d7dc1c44c9f9d9c988135d94, type: 3}

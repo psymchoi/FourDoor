@@ -11,20 +11,25 @@ public class PlayerController : MonoBehaviour
         NOTHING_WALK,
         NOTHING_RUN,
         NOTHING_JUMP,
-        EQUIP_LANTERN,
+        //EQUIP_LANTERN,
         LANTERN_IDLE_STANDING,
         LANTERN_IDLE_AROUND,
         LANTERN_WALK,
         LANTERN_RUN,
         LANTERN_JUMP,
+        RIFLE_IDLE,
+        RIFLE_WALK,
+        RIFLE_RUN,
+        RIFLE_FIRE,
         DIE
     }
 
     public static PlayerController _uniqueInstance;
 
     [SerializeField] GameObject _lantern;
-    [SerializeField] float walkSpeed = 3.0f;
-    [SerializeField] float runSpeed = 5.0f;
+    [SerializeField] GameObject _shotgun;
+    [SerializeField] float walkSpeed;
+    [SerializeField] float runSpeed;
     [SerializeField] float mouseSensitivity;
     [SerializeField] Transform player, playerArms;
 
@@ -38,6 +43,7 @@ public class PlayerController : MonoBehaviour
     float _timeCheck;
     bool _isDead;
     bool _equipLantern;
+    bool _equipShotgun;
 
 
     public ePlyAction PLAYERACTION
@@ -53,7 +59,9 @@ public class PlayerController : MonoBehaviour
         _aniCtrl = GetComponent<Animator>();
 
         _lantern.SetActive(false);
+        _shotgun.SetActive(false);
         _equipLantern = false;
+        _equipShotgun = false;
     }
 
     // Update is called once per frame
@@ -82,142 +90,134 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void PlayerAniAction()
     {
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {// 숫자 1을 눌렀을 때..
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {// 랜턴 들기 = 1번 키
+            if (_equipShotgun)
+                _equipShotgun = !_equipShotgun;
+
             _equipLantern = !_equipLantern;
-            if (_equipLantern)
-            {// 런턴 ON
-                _timeCheck = 0;
+            if(_equipLantern)
+            {// 랜턴 ON
                 _lantern.SetActive(true);
+                _shotgun.SetActive(false);
+                _aniCtrl.SetTrigger("HOLD_LANTERN");
                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_ON);
             }
             else
             {// 랜턴 OFF
-                _timeCheck = 0;
                 _lantern.SetActive(false);
+                _aniCtrl.SetTrigger("NOTHING_HOLD");
                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_OFF);
             }
         }
-
-        if (_equipLantern)
-        {// 랜턴을 들 때..
-            _timeCheck += Time.deltaTime;
-            if (MoveX == 0 && MoveZ == 0)
-            {// wsad값이 없는경우
-                if (MoveX != 0)
-                {// 회전ad값이 있는경우     =>  걷는 모션
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {// 점프
-                        ChangedAction(ePlyAction.LANTERN_JUMP);
-                    }
-                    else
-                    {// 걷기
-                        ChangedAction(ePlyAction.LANTERN_WALK);
-                    }
-                }
-                else
-                {// 회전ad값이 없는경우     =>  가만히 있는 모션
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {// 점프
-                        ChangedAction(ePlyAction.LANTERN_JUMP);
-                    }
-                    else
-                    {
-                        if (_timeCheck >= 0.2f)
-                            ChangedAction(ePlyAction.LANTERN_IDLE_STANDING);
-                        else
-                            ChangedAction(ePlyAction.EQUIP_LANTERN);
-                    }
-                }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {// 샷건 들기 = 2번 키
+            if(!SelectionManger._uniqueInstance.BOUGHT)
+            {// 샷건 구입 여부(x)
+                return;
             }
             else
-            {// ws값이 있는경우
-                if (Input.GetKey(KeyCode.LeftShift))
-                {// shift키와 w키가 눌렸을 때
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {// 점프
-                        ChangedAction(ePlyAction.LANTERN_JUMP);
-                    }
-                    else
-                    {// 달리기 및 랜턴장착모션
-                        if (_timeCheck >= 0.2f)
-                            ChangedAction(ePlyAction.LANTERN_RUN);
-                        else
-                            ChangedAction(ePlyAction.EQUIP_LANTERN);
-                    }
+            {// 샷건 구입 여부(o)
+                if (_equipLantern)
+                {
+                    _equipLantern = !_equipLantern;
+                    SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_OFF);
+                }
+
+                _equipShotgun = !_equipShotgun;
+                if(_equipShotgun)
+                {// 샷건 ON
+                    _shotgun.SetActive(true);
+                    _lantern.SetActive(false);
+                    ChangedAction(ePlyAction.RIFLE_IDLE);
+                    SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_EQUIP);
                 }
                 else
-                {// 안달리고 있을 때
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {// 점프
-                        ChangedAction(ePlyAction.LANTERN_JUMP);
-                    }
-                    else
-                    {// 걷기 및 랜턴장착모션
-                        if (_timeCheck >= 0.2f)
-                            ChangedAction(ePlyAction.LANTERN_WALK);
-                        else
-                            ChangedAction(ePlyAction.EQUIP_LANTERN);
-                    }
+                {// 샷건 OFF
+                    _shotgun.SetActive(false);
+                    _aniCtrl.SetTrigger("NOTHING_HOLD");
                 }
             }
         }
-        else
-        {// 랜턴을 안들때..
-            if (MoveX == 0 && MoveZ == 0)
-            {// wsad값이 없는경우
-                if (MoveX != 0)
-                {// 회전ad값이 있는경우     =>  걷는 모션
-                    _timeCheck = 0;
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        ChangedAction(ePlyAction.LANTERN_JUMP);
-                    }
-                    else
-                    {
-                        ChangedAction(ePlyAction.NOTHING_WALK);
-                    }
+
+        if(_equipLantern)
+        {// 랜턴 들고 있을 때 행동.
+            if(MoveX == 0 && MoveZ == 0)
+            {// 아무 이동이 없을 경우.
+                if(MoveX != 0)
+                {
+                    ChangedAction(ePlyAction.LANTERN_WALK);
                 }
                 else
-                {// 회전ad값이 없는경우     =>  가만히 있는 모션
-                    _timeCheck += Time.deltaTime;
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        ChangedAction(ePlyAction.NOTHING_JUMP);
-                    }
-                    else
-                    {
-                        if (_timeCheck >= 2.5f)
-                            ChangedAction(ePlyAction.NOTHING_IDLE_AROUND);
-                        else
-                            ChangedAction(ePlyAction.NOTHING_IDLE_STANDING);
-                    }
+                {
+                    ChangedAction(ePlyAction.LANTERN_IDLE_STANDING);
                 }
             }
             else
-            {// ws값이 있는경우
-                _timeCheck = 0;
-                if (Input.GetKey(KeyCode.LeftShift))
-                {
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        ChangedAction(ePlyAction.NOTHING_JUMP);
-                    }
-                    else
-                    {// shift키와 w키가 눌렸을 때       =>  달리는 모션;
-                        ChangedAction(ePlyAction.NOTHING_RUN);
-                    }
+            {
+                if(Input.GetKey(KeyCode.LeftShift))
+                {// Space = 달리기
+                    ChangedAction(ePlyAction.LANTERN_RUN);
                 }
                 else
-                { // 걷는모션;
-                    if (Input.GetKeyDown(KeyCode.Space))
-                    {
-                        ChangedAction(ePlyAction.NOTHING_JUMP);
-                    }
-                    else
-                    {// shift키와 w키가 눌렸을 때       =>  달리는 모션;
-                        ChangedAction(ePlyAction.NOTHING_WALK);
-                    }
+                {
+                    ChangedAction(ePlyAction.LANTERN_WALK);
+                }
+            }
+        }
+        else if(_equipShotgun)
+        {// 샷건 들고 있을 때 행동.
+            if(Input.GetMouseButtonDown(0))
+            {
+                ChangedAction(ePlyAction.RIFLE_FIRE);
+                return;
+            }
+
+            if (MoveX == 0 && MoveZ == 0)
+            {// 아무 이동이 없을 경우.
+                if (MoveX != 0)
+                {
+                    ChangedAction(ePlyAction.RIFLE_WALK);
+                }
+                else
+                {
+                    ChangedAction(ePlyAction.RIFLE_IDLE);
+                }
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {// Space = 달리기
+                    ChangedAction(ePlyAction.RIFLE_RUN);
+                }
+                else
+                {
+                    ChangedAction(ePlyAction.RIFLE_WALK);
+                }
+            }
+        }
+        else if(!_equipLantern && !_equipShotgun)
+        {// 아무것도 들고 있지 않을 때 행동.
+            if (MoveX == 0 && MoveZ == 0)
+            {// 아무 이동이 없을 경우.
+                if (MoveX != 0)
+                {
+                    ChangedAction(ePlyAction.NOTHING_WALK);
+                }
+                else
+                {
+                    ChangedAction(ePlyAction.NOTHING_IDLE_STANDING);
+                }
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.LeftShift))
+                {// Space = 달리기
+                    ChangedAction(ePlyAction.NOTHING_RUN);
+                }
+                else
+                {
+                    ChangedAction(ePlyAction.NOTHING_WALK);
                 }
             }
         }
@@ -270,11 +270,25 @@ public class PlayerController : MonoBehaviour
             case ePlyAction.NOTHING_RUN:
                 transform.Translate(_mov * runSpeed * Time.deltaTime);
                 break;
+            case ePlyAction.LANTERN_IDLE_STANDING:
+                break;
             case ePlyAction.LANTERN_WALK:
                 transform.Translate(_mov * walkSpeed * Time.deltaTime);
                 break;
             case ePlyAction.LANTERN_RUN:
                 transform.Translate(_mov * runSpeed * Time.deltaTime);
+                break;
+            case ePlyAction.RIFLE_IDLE:
+                break;
+            case ePlyAction.RIFLE_WALK:
+                transform.Translate(_mov * walkSpeed * Time.deltaTime);
+                break;
+            case ePlyAction.RIFLE_RUN:
+                transform.Translate(_mov * runSpeed * Time.deltaTime);
+                break;
+            case ePlyAction.RIFLE_FIRE:
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_FIRE);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_RELOADING);
                 break;
             case ePlyAction.DIE:
                 _isDead = true;
