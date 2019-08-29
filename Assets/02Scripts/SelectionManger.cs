@@ -13,11 +13,13 @@ public class SelectionManger : MonoBehaviour
     [SerializeField] GameObject[] _item;
     [SerializeField] GameObject[] _itemActive;
     [SerializeField] GameObject[] _candleLight;
+    [SerializeField] Slider[] _doorCloseSlider;
     [SerializeField] Text _gameExplain;
 
     Transform _selection;
     bool[] _onClick;
     bool[] _timeBought;
+    float[] _curValue;
 
     public bool BOUGHT
     {
@@ -32,6 +34,7 @@ public class SelectionManger : MonoBehaviour
         _gameExplain.text = "";
         _onClick = new bool[_door.Length];
         _timeBought = new bool[_item.Length];
+        _curValue = new float[_doorCloseSlider.Length];
 
         // _onClick     true = open / false = close
         for (int n = 0; n < _door.Length; n++)
@@ -39,6 +42,9 @@ public class SelectionManger : MonoBehaviour
 
         for(int n = 0; n < _item.Length; n++)
             _timeBought[n] = false;
+
+        for (int n = 0; n < _doorCloseSlider.Length; n++)
+            _curValue[n] = 1.0f;
     }
 
     // Update is called once per frame
@@ -129,7 +135,37 @@ public class SelectionManger : MonoBehaviour
                 _selection = null;
             }
 
+            for (int n = 0; n < _doorCloseSlider.Length; n++)
+            {
+                if (!_onClick[n * 2])
+                {// 문이 닫혀있을 때 슬라이더 이동
+                    if(_doorCloseSlider[n].value <= 0.01f)
+                    {// 슬라이더 시간이 다되면 문이 열림
+                        InGameController._uniqueInstance.DOORCOUNT--;
+                        _onClick[n * 2] = !_onClick[n * 2];
+                        _onClick[n * 2 + 1] = _onClick[n * 2];
+                        SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.DOOR_OPEN);
+                        _door[n * 2].GetComponent<Renderer>().material 
+                            = _door[n * 2 + 1].GetComponent<Renderer>().material
+                            = highlightMaterial[2];
+                        _door[n * 2].tag = _door[n * 2 + 1].tag = "Nothing";
 
+                        _curValue[n] = 0.03f;
+
+                        _selection = null;
+                        continue;
+                    }
+
+                    _doorCloseSlider[n].value = Mathf.MoveTowards(_curValue[n], 0.01f, Time.deltaTime / 10);
+                    _curValue[n] = (float)_doorCloseSlider[n].value;
+                }
+                else if(_onClick[n * 2])
+                {// 문이 열려있을 때
+                    _doorCloseSlider[n].value = _curValue[n];
+                }
+            }
+            
+                
             /*
              * 카메라 레이를 발사했을 때 나타나는 Material.
              * */
@@ -182,7 +218,7 @@ public class SelectionManger : MonoBehaviour
                     /*
                      * 레이가 찍히는 상태에서 버튼을 눌렀을 때 발생하는 이벤트.
                      * */
-                    if (Input.GetMouseButtonDown(1))
+                    if (Input.GetMouseButtonDown(0))
                     {// 오른쪽 마우스 버튼을 눌렀을 때 이벤트 발생.
                         for(int n = 0; n < _door.Length + 1; n++)
                         {
@@ -197,20 +233,23 @@ public class SelectionManger : MonoBehaviour
                                     InGameController._uniqueInstance.DOORCOUNT--;
                                     selectionRenderer.material = highlightMaterial[2];      
                                     SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.DOOR_OPEN);
+
                                     _door[n].tag = "Nothing";
                                     if (n % 2 == 0)
                                     {
                                         _door[n + 1].tag = "Nothing";
                                         _door[n + 1].GetComponent<Renderer>().material = highlightMaterial[2];
                                         _onClick[n + 1] = !_onClick[n + 1];
+                                        _curValue[n / 2] = 0.03f;
                                     }
                                     else
                                     {
                                         _door[n - 1].tag = "Nothing";
                                         _door[n - 1].GetComponent<Renderer>().material = highlightMaterial[2];
                                         _onClick[n - 1] = !_onClick[n - 1];
+                                        _curValue[n / 2] = 0.03f;
                                     }
-                            
+
                                     selection = null;
                                     break;
                                 }
@@ -230,18 +269,22 @@ public class SelectionManger : MonoBehaviour
                                     InGameController._uniqueInstance.DOORCOUNT++;
                                     selectionRenderer.material = highlightMaterial[2];
                                     SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.DOOR_CLOSE);
+
                                     _door[n].tag = selectableTag[0];
                                     if (n % 2 == 0)
                                     {
                                         _door[n + 1].tag = selectableTag[0];
                                         _door[n + 1].GetComponent<Renderer>().material = highlightMaterial[2];
                                         _onClick[n + 1] = !_onClick[n + 1];
+                                        _curValue[n / 2] = 1.0f;
                                     }
                                     else
                                     {
                                         _door[n - 1].tag = selectableTag[0];
                                         _door[n - 1].GetComponent<Renderer>().material = highlightMaterial[2];
                                         _onClick[n - 1] = !_onClick[n - 1];
+                                        _curValue[n / 2] = 1.0f;
+
                                     }
                                     break;
                                 }
@@ -268,7 +311,7 @@ public class SelectionManger : MonoBehaviour
                         selectionRenderer.material = highlightMaterial[4];
                     }
 
-                    if(Input.GetMouseButtonDown(1))
+                    if(Input.GetMouseButtonDown(0))
                     {
                         if(selection.gameObject == _item[0])
                         {// 샷건 90
@@ -288,7 +331,7 @@ public class SelectionManger : MonoBehaviour
                             }
                             else
                             {
-                                _gameExplain.text = "크리스탈이 부족합니다..";
+                                _gameExplain.text = "90 크리스탈";
                                 return;
                             }
                         }
@@ -309,12 +352,12 @@ public class SelectionManger : MonoBehaviour
                             }
                             else
                             {
-                                _gameExplain.text = "크리스탈이 부족합니다..";
+                                _gameExplain.text = "50 크리스탈";
                                 return;                             
                             }
                         }
                         else if(selection.gameObject == _item[2])
-                        {// 피아노 100
+                        {// 피아노 150
                             if (_timeBought[2])
                             {
                                 _gameExplain.text = "이미 소지하고 있다.";
@@ -330,7 +373,7 @@ public class SelectionManger : MonoBehaviour
                             }
                             else
                             {
-                                _gameExplain.text = "크리스탈이 부족합니다..";
+                                _gameExplain.text = "150 크리스탈";
                                 return;
                             }
                         }
@@ -345,7 +388,7 @@ public class SelectionManger : MonoBehaviour
                         selectionRenderer.material = highlightMaterial[4];
                     }
 
-                    if (Input.GetMouseButtonDown(1))
+                    if (Input.GetMouseButtonDown(0))
                     {
                         if(InGameController._uniqueInstance.TIMECHECK >= 1)
                         {

@@ -79,7 +79,7 @@ public class PlayerController : MonoBehaviour
             MoveZ = Input.GetAxis("Vertical");        // w, s          
 
             _mov = new Vector3(MoveX, 0, MoveZ);
-            _mov = (_mov.magnitude > 1) ? Vector3.zero : _mov;
+            _mov = (_mov.magnitude > 1) ? _mov.normalized : _mov;
 
             PlayerAniAction();
 
@@ -170,9 +170,10 @@ public class PlayerController : MonoBehaviour
         }
         else if (_equipShotgun)
         {// 샷건 들고 있을 때 행동.
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(1))
             {
                 ChangedAction(ePlyAction.RIFLE_FIRE);
+                GameObject.Find("FireEff").GetComponent<ParticleSystem>().Play();
                 return;
             }
 
@@ -292,6 +293,7 @@ public class PlayerController : MonoBehaviour
             case ePlyAction.RIFLE_FIRE:
                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_FIRE);
                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_RELOADING);
+                InGameController._uniqueInstance.TIMECHECK -= 10;
                 break;
             case ePlyAction.DIE:
                 _isDead = true;
