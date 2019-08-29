@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3a21f7221af5a241bbfed431280165c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _mainCamera: {fileID: 0}
   _prefabPlayer: {fileID: 6323047796473196078, guid: fdb4404acbbe65f45be42bc4a9b4d004,
     type: 3}
   _plyStartPosition: {fileID: 0}
@@ -50,6 +51,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  _playImg: {fileID: 0}
   _leftTimeTxt: {fileID: 0}
   _crystalTxt: {fileID: 0}
   _gameState: {fileID: 0}

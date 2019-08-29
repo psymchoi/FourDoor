@@ -45,10 +45,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectableTag:
   - Selectable
-  - SelectableShop
   - Nothing
+  - SelectableShop
   - Item
   - Light
+  - Pillow
   highlightMaterial:
   - {fileID: 2100000, guid: 3d9fa6ac54442d74ebdf8a3b19205a0b, type: 2}
   - {fileID: 2100000, guid: 42fc1c93b64aea843a1dff5e7059b086, type: 2}
@@ -83,6 +84,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _doorCloseSlider:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

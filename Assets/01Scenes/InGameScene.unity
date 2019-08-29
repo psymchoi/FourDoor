@@ -838,16 +838,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6761131350546419594, guid: 1a5ccd1bf0760594f8bb80c739285c4e,
         type: 3}
-      propertyPath: selectableTag.Array.size
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6761131350546419594, guid: 1a5ccd1bf0760594f8bb80c739285c4e,
-        type: 3}
-      propertyPath: _doorCloseSlider.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 6761131350546419594, guid: 1a5ccd1bf0760594f8bb80c739285c4e,
-        type: 3}
       propertyPath: _door.Array.data[0]
       value: 
       objectReference: {fileID: 1688135526}
@@ -953,26 +943,6 @@ PrefabInstance:
       objectReference: {fileID: 6494576803058048580}
     - target: {fileID: 6761131350546419594, guid: 1a5ccd1bf0760594f8bb80c739285c4e,
         type: 3}
-      propertyPath: _gameExplain
-      value: 
-      objectReference: {fileID: 198362875}
-    - target: {fileID: 6761131350546419594, guid: 1a5ccd1bf0760594f8bb80c739285c4e,
-        type: 3}
-      propertyPath: selectableTag.Array.data[5]
-      value: Pillow
-      objectReference: {fileID: 0}
-    - target: {fileID: 6761131350546419594, guid: 1a5ccd1bf0760594f8bb80c739285c4e,
-        type: 3}
-      propertyPath: selectableTag.Array.data[2]
-      value: SelectableShop
-      objectReference: {fileID: 0}
-    - target: {fileID: 6761131350546419594, guid: 1a5ccd1bf0760594f8bb80c739285c4e,
-        type: 3}
-      propertyPath: selectableTag.Array.data[1]
-      value: Nothing
-      objectReference: {fileID: 0}
-    - target: {fileID: 6761131350546419594, guid: 1a5ccd1bf0760594f8bb80c739285c4e,
-        type: 3}
       propertyPath: _doorCloseSlider.Array.data[0]
       value: 
       objectReference: {fileID: 878655888}
@@ -991,6 +961,11 @@ PrefabInstance:
       propertyPath: _doorCloseSlider.Array.data[3]
       value: 
       objectReference: {fileID: 639464074}
+    - target: {fileID: 6761131350546419594, guid: 1a5ccd1bf0760594f8bb80c739285c4e,
+        type: 3}
+      propertyPath: _gameExplain
+      value: 
+      objectReference: {fileID: 198362875}
     - target: {fileID: 6761131350546419593, guid: 1a5ccd1bf0760594f8bb80c739285c4e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1059,10 +1034,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ForPlayerUIFrame
-      objectReference: {fileID: 0}
-    - target: {fileID: 318998431, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7298686887023959341, guid: 554c767cecf02f842abe189dc955cb29,
         type: 3}
@@ -1240,6 +1211,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7935193724757016441, guid: 64d0cf84be6229747ad4acfc41618213,
         type: 3}
+      propertyPath: _mainCamera
+      value: 
+      objectReference: {fileID: 1430215381}
+    - target: {fileID: 7935193724757016441, guid: 64d0cf84be6229747ad4acfc41618213,
+        type: 3}
       propertyPath: _plyStartPosition
       value: 
       objectReference: {fileID: 408269854}
@@ -1258,6 +1234,11 @@ PrefabInstance:
       propertyPath: _itemList.Array.data[2]
       value: 
       objectReference: {fileID: 2777054276895442398}
+    - target: {fileID: 7935193724757016441, guid: 64d0cf84be6229747ad4acfc41618213,
+        type: 3}
+      propertyPath: _playImg
+      value: 
+      objectReference: {fileID: 318998431}
     - target: {fileID: 7935193724757016441, guid: 64d0cf84be6229747ad4acfc41618213,
         type: 3}
       propertyPath: _leftTimeTxt
@@ -1318,15 +1299,5 @@ PrefabInstance:
       propertyPath: _crystal
       value: 
       objectReference: {fileID: 1847798784}
-    - target: {fileID: 7935193724757016441, guid: 64d0cf84be6229747ad4acfc41618213,
-        type: 3}
-      propertyPath: _mainCamera
-      value: 
-      objectReference: {fileID: 1430215381}
-    - target: {fileID: 7935193724757016441, guid: 64d0cf84be6229747ad4acfc41618213,
-        type: 3}
-      propertyPath: _playImg
-      value: 
-      objectReference: {fileID: 318998431}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64d0cf84be6229747ad4acfc41618213, type: 3}
