@@ -121,6 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 778460229}
+  - component: {fileID: 778460230}
   m_Layer: 0
   m_Name: BaseGameManager
   m_TagString: Untagged
@@ -142,108 +143,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &904536662 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3518841699160652281, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-    type: 3}
-  m_PrefabInstance: {fileID: 3518841698691339333}
-  m_PrefabAsset: {fileID: 0}
---- !u!82 &904536663
-AudioSource:
+--- !u!114 &778460230
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 904536662}
+  m_GameObject: {fileID: 778460228}
   m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab895c4741477804f8e8162e46cc4280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3518841698691339333
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -313,68 +224,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
         type: 3}
-      propertyPath: _effClips.Array.size
-      value: 16
-      objectReference: {fileID: 0}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _effClips.Array.data[7]
-      value: 
-      objectReference: {fileID: 8300000, guid: 68d4a5bd7ee630e4f8d116aa263ae619, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _effClips.Array.data[8]
-      value: 
-      objectReference: {fileID: 8300000, guid: f2d2b295ffff6bb4ea03249b25247f3f, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _effClips.Array.data[9]
-      value: 
-      objectReference: {fileID: 8300000, guid: f24486fa589fc1c4887bb945bc7b8da7, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _effClips.Array.data[10]
-      value: 
-      objectReference: {fileID: 8300000, guid: 9d1844a8e0d05cf41899c0f56b662d91, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _effClips.Array.data[11]
-      value: 
-      objectReference: {fileID: 8300000, guid: 7e1996464cad17b4e8ed5b67bae0c827, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _bgmClips.Array.data[0]
-      value: 
-      objectReference: {fileID: 8300000, guid: 6ad2229df9a58cd4693d280a7130cd0a, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
       propertyPath: _bgmClips.Array.data[1]
       value: 
-      objectReference: {fileID: 8300000, guid: 0d0dadf322a21c744bac291606057aaa, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _effClips.Array.data[12]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8605ae65ab269434f843b39479d4b302, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _effClips.Array.data[13]
-      value: 
-      objectReference: {fileID: 8300000, guid: d4cc453ab35d651418b54a4656a951eb, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _effClips.Array.data[14]
-      value: 
-      objectReference: {fileID: 8300000, guid: b58a61f54412d974ea945e4c7dc36c06, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _effClips.Array.data[15]
-      value: 
-      objectReference: {fileID: 8300000, guid: 7e44a8561bfee6c48919b0c77be79cec, type: 3}
-    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
-        type: 3}
-      propertyPath: _effClips.Array.data[16]
-      value: 
-      objectReference: {fileID: 8300000, guid: 8605ae65ab269434f843b39479d4b302, type: 3}
+      objectReference: {fileID: 8300000, guid: b807309a3d0cd5e4ebf3e83c693c5681, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ad27a24d7dc1c44c9f9d9c988135d94, type: 3}

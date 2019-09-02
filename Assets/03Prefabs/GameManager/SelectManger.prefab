@@ -51,10 +51,10 @@ MonoBehaviour:
   - Light
   - Pillow
   highlightMaterial:
-  - {fileID: 2100000, guid: 3d9fa6ac54442d74ebdf8a3b19205a0b, type: 2}
+  - {fileID: 2100000, guid: a3f91d85384e68b42b18ebb65933554a, type: 2}
   - {fileID: 2100000, guid: 42fc1c93b64aea843a1dff5e7059b086, type: 2}
   - {fileID: 2100000, guid: 8a11d189ee33b7c4ea919fab8a53287a, type: 2}
-  - {fileID: 2100000, guid: a3f91d85384e68b42b18ebb65933554a, type: 2}
+  - {fileID: 2100000, guid: 3d9fa6ac54442d74ebdf8a3b19205a0b, type: 2}
   - {fileID: 2100000, guid: 3e1a36e67ae5e444f9eb43523ba025ac, type: 2}
   defaultMaterial:
   - {fileID: 2100000, guid: 08f42fbfe6bb3d4449245131e3347c71, type: 2}

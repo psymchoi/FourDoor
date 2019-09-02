@@ -16,6 +16,9 @@ TagManager:
   - Item
   - Light
   - Pillow
+  - Bullet
+  - ShootPos
+  - Monster
   layers:
   - Default
   - TransparentFX
