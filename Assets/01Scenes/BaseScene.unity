@@ -224,8 +224,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
         type: 3}
+      propertyPath: _effClips.Array.size
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
+        type: 3}
       propertyPath: _bgmClips.Array.data[1]
       value: 
       objectReference: {fileID: 8300000, guid: b807309a3d0cd5e4ebf3e83c693c5681, type: 3}
+    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
+        type: 3}
+      propertyPath: _effClips.Array.data[16]
+      value: 
+      objectReference: {fileID: 8300000, guid: 7b0f480a432802d49b6bb1c5ce45f43c, type: 3}
+    - target: {fileID: 3518841699160652283, guid: 6ad27a24d7dc1c44c9f9d9c988135d94,
+        type: 3}
+      propertyPath: _effClips.Array.data[17]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d7eb7762cdb6d944b92cc275f60ff05, type: 3}
+    - target: {fileID: 904536663, guid: 6ad27a24d7dc1c44c9f9d9c988135d94, type: 3}
+      propertyPath: m_Volume
+      value: 0.85
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ad27a24d7dc1c44c9f9d9c988135d94, type: 3}

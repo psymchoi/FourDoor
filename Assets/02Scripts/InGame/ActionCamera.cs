@@ -76,7 +76,6 @@ public class ActionCamera : MonoBehaviour
                     transform.LookAt(_lookPos);
                     _cameraState = eStateCamera.FOLLOW;
                     InGameController._uniqueInstance.NOWGAMESTATE = InGameController.eGameState.START;
-                    InGameController._uniqueInstance.PLAYIMG.SetActive(false);
                 }
                 break;
             case eStateCamera.FOLLOW:

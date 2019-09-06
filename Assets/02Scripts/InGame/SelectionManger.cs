@@ -57,7 +57,7 @@ public class SelectionManger : MonoBehaviour
         for (int n = 0; n < _doorCloseSlider.Length; n++)
             _curValue[n] = 1.0f;
 
-        _divideOpenDoorNum = 15;
+        _divideOpenDoorNum = 23;
     }
 
     // Update is called once per frame
@@ -327,20 +327,20 @@ public class SelectionManger : MonoBehaviour
                     if(Input.GetMouseButtonDown(0))
                     {
                         if(selection.gameObject == _item[0])
-                        {// 샷건 90
+                        {// 샷건 30
                             if (_timeBought[0])
                             {
                                 _gameExplain.text = "이미 소지하고 있다.";
                                 return;
                             }
 
-                            if (InGameController._uniqueInstance.CRYSTAL >= 1)
+                            if (InGameController._uniqueInstance.CRYSTAL >= 30)
                             {
                                 _timeBought[0] = true;
                                 _item[0].SetActive(false);
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.BTN);
                                 PlayerController._uniqueInstance.ChangedAction(PlayerController.ePlyAction.RIFLE_IDLE);
-                                InGameController._uniqueInstance.CRYSTAL -= 1;
+                                InGameController._uniqueInstance.CRYSTAL -= 30;
                             }
                             else
                             {
@@ -356,11 +356,11 @@ public class SelectionManger : MonoBehaviour
                                 return;
                             }
 
-                            if (InGameController._uniqueInstance.CRYSTAL >= 5)
+                            if (InGameController._uniqueInstance.CRYSTAL >= 50)
                             {
                                 _timeBought[1] = true;
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.BTN);
-                                InGameController._uniqueInstance.CRYSTAL -= 5;
+                                InGameController._uniqueInstance.CRYSTAL -= 50;
                                 _itemActive[0].SetActive(true);
                                 _gameExplain.text = "외부인의 움직임이 둔해진다..";
                             }
@@ -371,18 +371,18 @@ public class SelectionManger : MonoBehaviour
                             }
                         }
                         else if(selection.gameObject == _item[2])
-                        {// 피아노 150
+                        {// 피아노 200
                             if (_timeBought[2])
                             {
                                 _gameExplain.text = "이미 소지하고 있다.";
                                 return;
                             }
 
-                            if (InGameController._uniqueInstance.CRYSTAL >= 10)
+                            if (InGameController._uniqueInstance.CRYSTAL >= 200)
                             {
                                 _timeBought[2] = true;
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.BTN);
-                                InGameController._uniqueInstance.CRYSTAL -= 10;
+                                InGameController._uniqueInstance.CRYSTAL -= 200;
                                 _itemActive[1].SetActive(true);
                             }
                             else
@@ -404,14 +404,14 @@ public class SelectionManger : MonoBehaviour
 
                     if (Input.GetMouseButtonDown(0))
                     {
-                        if(InGameController._uniqueInstance.CRYSTAL >= 1)
+                        if(InGameController._uniqueInstance.CRYSTAL >= 5)
                         {
                             for (int n = 0; n < _candleLight.Length; n++)
                             {
                                 if(selection.gameObject == _candleLight[n])
                                 {
                                     SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.MATCHES_SOUND);
-                                    InGameController._uniqueInstance.CRYSTAL -= 1;
+                                    InGameController._uniqueInstance.CRYSTAL -= 5;
                                     InGameController._uniqueInstance.CANDLELIGHT[n].range += 1.5f;
                                     return;
                                 }
@@ -419,7 +419,7 @@ public class SelectionManger : MonoBehaviour
                         }
                         else
                         {
-                            _gameExplain.text = "크리스탈이 부족합니다.";
+                            _gameExplain.text = "5 크리스탈";
                             return;
                         }
                     }

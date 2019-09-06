@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
+    public static SoundManager _uniqueInstance;
+
     public enum eBGMType
     {
         LOBBY   = 0,
@@ -28,21 +30,34 @@ public class SoundManager : MonoBehaviour
         SHOTGUN_EQUIP,
         SHOTGUN_FIRE,
         SHOTGUN_RELOADING,
+        CONGRATULATIONS,
     }
 
-    public static SoundManager _uniqueInstance;
+
     [SerializeField] AudioClip[] _bgmClips;
     [SerializeField] AudioClip[] _effClips;
 
     AudioSource _bgmPlayer;
     List<AudioSource> _ltEffPlayer;
 
+    public static SoundManager INSTANCE
+    {
+        get { return _uniqueInstance; }
+    }
+    public AudioSource BGM
+    {
+        get { return _bgmPlayer; }
+        set { _bgmPlayer = value; }
+    }
     // Start is called before the first frame update
     void Start()
     {
         _uniqueInstance = this;
         _bgmPlayer = GetComponent<AudioSource>();
         _ltEffPlayer = new List<AudioSource>();
+
+        SoundManager._uniqueInstance.PlayBGMSound(SoundManager.eBGMType.LOBBY);
+
     }
 
     // Update is called once per frame

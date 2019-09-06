@@ -53,8 +53,9 @@ public class MonsterController : MonoBehaviour
         if (BaseGameManager._uniqueInstance.CURGAMESTATE != BaseGameManager.eLoadingState.END)
             return;
 
-        //if (InGameController._uniqueInstance.NOWGAMESTATE == InGameController.eGameState.END)
-        //    Destroy(this.gameObject);
+        if (InGameController._uniqueInstance.NEXTDAY ||
+            InGameController._uniqueInstance.NOWGAMESTATE == InGameController.eGameState.RESULT)
+            Destroy(this.gameObject);
 
         if (InGameController._uniqueInstance.NOWGAMESTATE == InGameController.eGameState.PLAY)
         {
@@ -176,7 +177,7 @@ public class MonsterController : MonoBehaviour
                 break;
             case eMonsterAction.CLOWN_TryOPEN:
                 // 광대만 있는 에니메이션
-                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.CLOWN_TryOPEN_KNOCK);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.CLOWN_TryOPEN_KNOCK, OptionMenu._uniqueInstance.EFF_VOL.value);
                 _naviAgent.enabled = false;
                 break;
             case eMonsterAction.WALK_CLOWN:
@@ -198,19 +199,20 @@ public class MonsterController : MonoBehaviour
             //Destroy(go);
             Destroy(other.gameObject);
             InGameController._uniqueInstance.NOWGAMESTATE = InGameController.eGameState.END;
-            InGameController._uniqueInstance.gameObject.SetActive(true);
+            InGameController._uniqueInstance.GAMESTATE.gameObject.SetActive(true);
             InGameController._uniqueInstance.GAMESTATE.text = "GAMEOVER..";
+            SceneChanger._uniqueInstance.EndGame();
             PlayerController._uniqueInstance.PLYDEAD = true;
         }
         else if(other.CompareTag("Selectable"))
         {// 부딪힌 물체가 문인 경우
             Destroy(gameObject);
             if (_monsterKind == eMonsterType.CLOWN)
-                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.CLOWN_DIE_SCREAM);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.CLOWN_DIE_SCREAM, OptionMenu._uniqueInstance.EFF_VOL.value);
             else if (_monsterKind == eMonsterType.GHOST)
-                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.GHOST_DIE_SCREAM);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.GHOST_DIE_SCREAM, OptionMenu._uniqueInstance.EFF_VOL.value);
             else if (_monsterKind == eMonsterType.ZOMBIE)
-                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.ZOMBIE_DIE_SCREAM);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.ZOMBIE_DIE_SCREAM, OptionMenu._uniqueInstance.EFF_VOL.value);
         }
     }
 

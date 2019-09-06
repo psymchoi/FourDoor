@@ -223,12 +223,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1688135518}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &318998431 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 318998431, guid: 554c767cecf02f842abe189dc955cb29,
-    type: 3}
-  m_PrefabInstance: {fileID: 7298686886695593245}
-  m_PrefabAsset: {fileID: 0}
 --- !u!108 &398123726 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 398123726, guid: 23cf016d72fc973448448bec5dcc93bd,
@@ -451,6 +445,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8216550223763432976, guid: 20640ce5e8ade0440a0d444a2e8689c5,
+        type: 3}
+      propertyPath: _movSpeed
+      value: 12
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20640ce5e8ade0440a0d444a2e8689c5, type: 3}
 --- !u!108 &1347340415 stripped
@@ -554,6 +553,26 @@ PrefabInstance:
     - target: {fileID: 4385881024263822822, guid: 23cf016d72fc973448448bec5dcc93bd,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7067297843308355163, guid: 23cf016d72fc973448448bec5dcc93bd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2088193777331912039, guid: 23cf016d72fc973448448bec5dcc93bd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1741694070335373103, guid: 23cf016d72fc973448448bec5dcc93bd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2777054276895442398, guid: 23cf016d72fc973448448bec5dcc93bd,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8478158759487401103, guid: 23cf016d72fc973448448bec5dcc93bd,
@@ -1201,6 +1220,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9033221458570717462, guid: 554c767cecf02f842abe189dc955cb29,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
 --- !u!1001 &7935193724822088960
@@ -1299,7 +1323,7 @@ PrefabInstance:
         type: 3}
       propertyPath: _playImg
       value: 
-      objectReference: {fileID: 318998431}
+      objectReference: {fileID: 0}
     - target: {fileID: 7935193724757016441, guid: 64d0cf84be6229747ad4acfc41618213,
         type: 3}
       propertyPath: _leftTimeTxt

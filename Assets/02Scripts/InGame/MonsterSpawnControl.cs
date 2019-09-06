@@ -47,8 +47,12 @@ public class MonsterSpawnControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(InGameController._uniqueInstance.NOWGAMESTATE == InGameController.eGameState.END)
+        if(InGameController._uniqueInstance.NOWGAMESTATE == InGameController.eGameState.PLAY)
         {
+            if (InGameController._uniqueInstance.NEXTDAY || 
+                InGameController._uniqueInstance.NOWGAMESTATE == InGameController.eGameState.RESULT)
+                return;
+
             if (InGameController._uniqueInstance.ENABLESPAWN)
             {
                 if (_ltSpawns.Count < _limitCountSpawn)

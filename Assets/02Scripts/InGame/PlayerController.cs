@@ -117,13 +117,13 @@ public class PlayerController : MonoBehaviour
                 _lantern.SetActive(true);
                 _shotgun.SetActive(false);
                 _aniCtrl.SetTrigger("HOLD_LANTERN");
-                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_ON);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_ON, OptionMenu._uniqueInstance.EFF_VOL.value);
             }
             else
             {// 랜턴 OFF
                 _lantern.SetActive(false);
                 _aniCtrl.SetTrigger("NOTHING_HOLD");
-                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_OFF);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_OFF, OptionMenu._uniqueInstance.EFF_VOL.value);
             }
         }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -138,7 +138,7 @@ public class PlayerController : MonoBehaviour
                 {
                     _equipLantern = !_equipLantern;
                     _aniCtrl.SetTrigger("HOLD_LANTERN");
-                    SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_OFF);
+                    SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.LANTERN_OFF, OptionMenu._uniqueInstance.EFF_VOL.value);
                 }
 
                 _equipShotgun = !_equipShotgun;
@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
                     _shotgun.SetActive(true);
                     _lantern.SetActive(false);
                     ChangedAction(ePlyAction.RIFLE_IDLE);
-                    SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_EQUIP);
+                    SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_EQUIP, OptionMenu._uniqueInstance.EFF_VOL.value);
                 }
                 else
                 {// 샷건 OFF
@@ -300,8 +300,8 @@ public class PlayerController : MonoBehaviour
                 transform.Translate(_mov * runSpeed * Time.deltaTime);
                 break;
             case ePlyAction.RIFLE_FIRE:
-                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_FIRE);
-                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_RELOADING);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_FIRE, OptionMenu._uniqueInstance.EFF_VOL.value);
+                SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.SHOTGUN_RELOADING, OptionMenu._uniqueInstance.EFF_VOL.value);
                 InGameController._uniqueInstance.CRYSTAL -= 10;
                 break;
             case ePlyAction.DIE:
