@@ -50,7 +50,7 @@ public class MonsterController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (BaseGameManager._uniqueInstance.CURGAMESTATE != BaseGameManager.eLoadingState.END)
+        if (BaseGameManager._uniqueInstance.CURGAMELOAD != BaseGameManager.eLoadingState.END)
             return;
 
         if (InGameController._uniqueInstance.NEXTDAY ||

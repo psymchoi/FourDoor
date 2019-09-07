@@ -31,6 +31,7 @@ public class SoundManager : MonoBehaviour
         SHOTGUN_FIRE,
         SHOTGUN_RELOADING,
         CONGRATULATIONS,
+        ACHIEVMENT,
     }
 
 

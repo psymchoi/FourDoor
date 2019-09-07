@@ -334,13 +334,15 @@ public class SelectionManger : MonoBehaviour
                                 return;
                             }
 
-                            if (InGameController._uniqueInstance.CRYSTAL >= 30)
+                            if (InGameController._uniqueInstance.CRYSTAL >= 1)
                             {
                                 _timeBought[0] = true;
                                 _item[0].SetActive(false);
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.BTN);
                                 PlayerController._uniqueInstance.ChangedAction(PlayerController.ePlyAction.RIFLE_IDLE);
-                                InGameController._uniqueInstance.CRYSTAL -= 30;
+                                InGameController._uniqueInstance.CRYSTAL -= 1;
+
+                                AchievementManager.Instance.EarnAchievment("Hunter");
                             }
                             else
                             {
@@ -356,13 +358,15 @@ public class SelectionManger : MonoBehaviour
                                 return;
                             }
 
-                            if (InGameController._uniqueInstance.CRYSTAL >= 50)
+                            if (InGameController._uniqueInstance.CRYSTAL >= 1)
                             {
                                 _timeBought[1] = true;
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.BTN);
-                                InGameController._uniqueInstance.CRYSTAL -= 50;
+                                InGameController._uniqueInstance.CRYSTAL -= 1;
                                 _itemActive[0].SetActive(true);
                                 _gameExplain.text = "외부인의 움직임이 둔해진다..";
+
+                                AchievementManager.Instance.EarnAchievment("So Scratchy..");
                             }
                             else
                             {
@@ -378,16 +382,18 @@ public class SelectionManger : MonoBehaviour
                                 return;
                             }
 
-                            if (InGameController._uniqueInstance.CRYSTAL >= 200)
+                            if (InGameController._uniqueInstance.CRYSTAL >= 1)
                             {
                                 _timeBought[2] = true;
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.BTN);
-                                InGameController._uniqueInstance.CRYSTAL -= 200;
+                                InGameController._uniqueInstance.CRYSTAL -= 1;
                                 _itemActive[1].SetActive(true);
+
+                                AchievementManager.Instance.EarnAchievment("Was it working..?");
                             }
                             else
                             {
-                                _gameExplain.text = "150 크리스탈";
+                                _gameExplain.text = "200 크리스탈";
                                 return;
                             }
                         }

@@ -1,0 +1,62 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &455703895266981334
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 455703895266981328}
+  - component: {fileID: 455703895266981329}
+  m_Layer: 0
+  m_Name: AchievementManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &455703895266981328
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455703895266981334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 69.80783, y: 40.326363, z: 2.2331498}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &455703895266981329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 455703895266981334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e856aa0a6f7b344ba50966a2a1fae34, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  achievmentPrefab: {fileID: 4022259107268519858, guid: c2822644a9ab1e94f9ab382417cf1356,
+    type: 3}
+  visualAchievment: {fileID: 7774610283757770941, guid: 87b730486d6d8034ca5212695bb08b2d,
+    type: 3}
+  unlockedSprite:
+  - {fileID: 21300000, guid: a454050719005b444b59a84eaafba779, type: 3}
+  - {fileID: 21300000, guid: e9d4143c19529834981ac6821a04aecd, type: 3}
+  - {fileID: 21300000, guid: e467a7f7b7a4a714db7da4a6ada82425, type: 3}
+  description:
+  - Press W
+  - Press S
+  - So Easy
+  - You want a piece of me boy?
+  - 'It really works to outsider! '
+  - It stabilizes my mind. It looks scary but...
+  - Is it a little long alive?
+  textPoints: {fileID: 0}

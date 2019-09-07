@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class BaseGameManager : MonoBehaviour
 {
     public static BaseGameManager _uniqueInstance;
+    public GameObject _achievmentList;
 
     public enum eLoadingState
     {
@@ -26,10 +27,16 @@ public class BaseGameManager : MonoBehaviour
     eLoadingState _curGameLoad;
     eStageState _curStage;
 
-    public eLoadingState CURGAMESTATE
+    public eLoadingState CURGAMELOAD
     {
         get { return _curGameLoad; }
         set { _curGameLoad = value; }
+    }
+
+    public eStageState CURGAMESTATE
+    {
+        get { return _curStage; }
+        set { _curStage = value; }
     }
 
     // Start is called before the first frame update
@@ -37,9 +44,21 @@ public class BaseGameManager : MonoBehaviour
     {
         _uniqueInstance = this;
 
-        SceneManager.LoadSceneAsync("LobbyScene", LoadSceneMode.Additive);
+        //SceneManager.LoadSceneAsync("LobbyScene", LoadSceneMode.Additive);
         // SoundManager._uniqueInstance.PlayBGMSound(SoundManager.eBGMType.LOBBY);
         _curStage = eStageState.LOBBY;
+    }
+
+    void LateUpdate()
+    {
+        if(LobbyManager._uniqueInstance.ACHIEVMENT)
+        {
+            _achievmentList.SetActive(true);
+        }
+        else
+        {
+            _achievmentList.SetActive(false);
+        }        
     }
 
     public IEnumerator LoadingScene(string[] loadName = null, string[] unloadName = null)
