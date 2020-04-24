@@ -112,7 +112,7 @@ public class InGameController : MonoBehaviour
                 _gameState.text = "GameStart!";
                 if(_crstl >= 1.5f)
                 {
-                    _crstl = 0;
+                    _crstl = 15;
                     _gameState.gameObject.SetActive(false);
                     _curGameState = eGameState.PLAY;
                 }
@@ -203,7 +203,7 @@ public class InGameController : MonoBehaviour
         // 촛대 밝기 상태, 크리스탈 밝기 상태
         for (int n = 0; n < _candleLight.Length; n++)
         {
-            _candleLight[n].range = 0f;
+            _candleLight[n].range = 1.0f;
         }
         _crystal.range = 1.0f;
 

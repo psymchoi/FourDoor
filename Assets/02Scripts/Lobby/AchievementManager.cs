@@ -10,12 +10,15 @@ public class AchievementManager : MonoBehaviour
     
     public GameObject achievmentPrefab;
     public GameObject visualAchievment;
+    public GameObject _achievmentList;
+
     public Sprite[] unlockedSprite;
     public string[] description;
     public Text textPoints;
     //public Sprite[] sprites;
 
     int fadeTime = 2;
+    bool unlocked;
    
     public static AchievementManager Instance
     {
@@ -28,11 +31,16 @@ public class AchievementManager : MonoBehaviour
             return AchievementManager._uniqueInstance;
         }
     }
+    public GameObject AchievmentObj
+    {
+        get { return _achievmentList; }
+        set { _achievmentList = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        PlayerPrefs.DeleteAll();
+        //PlayerPrefs.DeleteAll();
         //PlayerPrefs.DeleteKey("Points");
         textPoints.text
                = string.Format("ARIVAL : {0} / {1}", PlayerPrefs.GetInt("Points"), "20");
@@ -45,7 +53,7 @@ public class AchievementManager : MonoBehaviour
         CreateAchievment("General", description[3], "Hunter", "???", 1, 0);                 // 샷건
         CreateAchievment("General", description[4], "So Scratchy..", "???", 1, 0);          // 레코드판
         CreateAchievment("General", description[5], "Was it working..?", "???", 1, 0);      // 피아노맨
-        CreateAchievment("General", description[6], "★Grand Slam★", "???", 1, 0, new string[] { "Hunter", "So Scratchy..", "Was it working..?" });      // 아이템 다 모으면
+        CreateAchievment("General", description[6], "★Grand Slam★", "???", 1, 0, new string[] { "Hunter", "So Scratchy..", "Was it working..?" }, _achievmentList);      // 아이템 다 모으면
     }
 
     // Update is called once per frame
@@ -136,7 +144,7 @@ public class AchievementManager : MonoBehaviour
     /// <param name="description">업적내용</param>
     /// <param name="points">업적포인트</param>
     /// <param name="spriteIndex">사실상 노필요..</param>
-    public void CreateAchievment(string parent, string achievmentContent, string title, string description, int points, int spriteIndex, string[] dependencies = null)
+    public void CreateAchievment(string parent, string achievmentContent, string title, string description, int points, int spriteIndex, string[] dependencies = null, GameObject _uiAchievment = null)
     {
         GameObject achievment = (GameObject)Instantiate(achievmentPrefab);      // 업적 내용 프리팹 클론복사.
         Achievment newAchievment = new Achievment(achievmentContent, title, description, points, spriteIndex, achievment);
@@ -155,6 +163,11 @@ public class AchievementManager : MonoBehaviour
                 // NewAchievment = Press W --> Press Space
             }
         }
+
+        if(_uiAchievment != null)
+        {
+            _uiAchievment.SetActive(false);
+        }
     }
 
     /// <summary>
@@ -169,10 +182,8 @@ public class AchievementManager : MonoBehaviour
         achievment.transform.SetParent(GameObject.Find(parent).transform);
         achievment.transform.localScale = new Vector3(1, 1, 1);
         achievment.transform.GetChild(0).GetComponent<Text>().text = title;
-        
-        if(achievementContent == null)
-            achievment.transform.GetChild(1).GetComponent<Text>().text = achievments[title].Description;
-        else
+
+        if (achievementContent != null)
             achievment.transform.GetChild(1).GetComponent<Text>().text = achievementContent;
 
         //achievment.transform.GetChild(2).GetComponent<Text>().text = achievments[title].Points.ToString();

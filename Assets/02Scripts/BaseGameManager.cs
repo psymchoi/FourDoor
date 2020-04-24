@@ -44,22 +44,22 @@ public class BaseGameManager : MonoBehaviour
     {
         _uniqueInstance = this;
 
-        //SceneManager.LoadSceneAsync("LobbyScene", LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("LobbyScene", LoadSceneMode.Additive);
         // SoundManager._uniqueInstance.PlayBGMSound(SoundManager.eBGMType.LOBBY);
         _curStage = eStageState.LOBBY;
     }
 
-    void LateUpdate()
-    {
-        if(LobbyManager._uniqueInstance.ACHIEVMENT)
-        {
-            _achievmentList.SetActive(true);
-        }
-        else
-        {
-            _achievmentList.SetActive(false);
-        }        
-    }
+    //void LateUpdate()
+    //{
+    //    if(LobbyManager._uniqueInstance.ACHIEVMENT)
+    //    {
+    //        _achievmentList.SetActive(true);
+    //    }
+    //    else
+    //    {
+    //        _achievmentList.SetActive(false);
+    //    }        
+    //}
 
     public IEnumerator LoadingScene(string[] loadName = null, string[] unloadName = null)
     {

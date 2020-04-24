@@ -18,18 +18,11 @@ public class LobbyManager : MonoBehaviour
     [SerializeField] GameObject _itemManual;
 
     BaseGameManager.eStageState _curStageIdx;
-
-    bool _achievmentBtn;
-    public bool ACHIEVMENT
-    {
-        get { return _achievmentBtn; }
-        set { _achievmentBtn = value; }
-    }
+    
 
     void Start()
     {
         _uniqueInstance = this;
-        _achievmentBtn = false;
     }
 
     public void SettingBtn()
@@ -40,6 +33,7 @@ public class LobbyManager : MonoBehaviour
         _settingBtn.SetActive(false);
         _quitBtn.SetActive(false);
         _settingObj.SetActive(true);
+        AchievementManager.Instance.AchievmentObj.SetActive(false);
     }
     public void ManualBtn()
     {// 조작법 버튼 클릭.
@@ -50,7 +44,7 @@ public class LobbyManager : MonoBehaviour
         _controlManualExplain.text = " w a s d \n Left Shift \n Press 1 \n Press 2 \n Left Mouse \n Right Mouse";
         _optionManual.SetActive(false);
         _itemManual.SetActive(false);
-        _achievmentBtn = false;
+        AchievementManager.Instance.AchievmentObj.SetActive(false);
     }
     public void OptionBtn()
     {// 옵션 보튼 클릭.
@@ -59,7 +53,7 @@ public class LobbyManager : MonoBehaviour
         _controlManualExplain.gameObject.SetActive(false);
         _optionManual.SetActive(true);
         _itemManual.SetActive(false);
-        _achievmentBtn = false;
+        AchievementManager.Instance.AchievmentObj.SetActive(false);
     }
     public void ItemExplainBtn()
     {
@@ -68,7 +62,7 @@ public class LobbyManager : MonoBehaviour
         _controlManualExplain.gameObject.SetActive(false);
         _optionManual.SetActive(false);
         _itemManual.SetActive(true);
-        _achievmentBtn = false;
+        AchievementManager.Instance.AchievmentObj.SetActive(false);
     }
     public void AchievmentBtn()
     {
@@ -77,7 +71,7 @@ public class LobbyManager : MonoBehaviour
         _controlManualExplain.gameObject.SetActive(false);
         _optionManual.SetActive(false);
         _itemManual.SetActive(false);
-        _achievmentBtn = true;
+        AchievementManager.Instance.AchievmentObj.SetActive(true);
     }
 
     public void BackBtn()
@@ -88,7 +82,7 @@ public class LobbyManager : MonoBehaviour
         _settingBtn.SetActive(true);
         _quitBtn.SetActive(true);
         _settingObj.SetActive(false);
-        _achievmentBtn = false;
+        AchievementManager.Instance.AchievmentObj.SetActive(false);
     }
 
     public void QuitBtn()

@@ -115,9 +115,13 @@ public class Achievment : MonoBehaviour
             AchievementManager.Instance.textPoints.text 
                 = string.Format("ARIVAL : {0} / {1}", PlayerPrefs.GetInt("Points"), "20");
             achievmentRef.GetComponent<Image>().sprite = AchievementManager.Instance.unlockedSprite[0];
-            achievmentRef.GetComponent<Text>().text = this.achievmentContent;
+            achievmentRef.transform.GetChild(1).GetComponent<Text>().text = this.achievmentContent;
             achievmentRef.transform.GetChild(2).GetComponent<Image>().sprite = AchievementManager.Instance.unlockedSprite[1];
             achievmentRef.transform.GetChild(3).GetComponent<Image>().sprite = AchievementManager.Instance.unlockedSprite[2];
+        }
+        else
+        {
+            achievmentRef.transform.GetChild(1).GetComponent<Text>().text = this.description;
         }
     }
 }

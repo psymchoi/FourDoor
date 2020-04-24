@@ -358,11 +358,11 @@ public class SelectionManger : MonoBehaviour
                                 return;
                             }
 
-                            if (InGameController._uniqueInstance.CRYSTAL >= 1)
+                            if (InGameController._uniqueInstance.CRYSTAL >= 50)
                             {
                                 _timeBought[1] = true;
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.BTN);
-                                InGameController._uniqueInstance.CRYSTAL -= 1;
+                                InGameController._uniqueInstance.CRYSTAL -= 50;
                                 _itemActive[0].SetActive(true);
                                 _gameExplain.text = "외부인의 움직임이 둔해진다..";
 
@@ -382,11 +382,11 @@ public class SelectionManger : MonoBehaviour
                                 return;
                             }
 
-                            if (InGameController._uniqueInstance.CRYSTAL >= 1)
+                            if (InGameController._uniqueInstance.CRYSTAL >= 200)
                             {
                                 _timeBought[2] = true;
                                 SoundManager._uniqueInstance.PlayEffSound(SoundManager.eEffType.BTN);
-                                InGameController._uniqueInstance.CRYSTAL -= 1;
+                                InGameController._uniqueInstance.CRYSTAL -= 200;
                                 _itemActive[1].SetActive(true);
 
                                 AchievementManager.Instance.EarnAchievment("Was it working..?");

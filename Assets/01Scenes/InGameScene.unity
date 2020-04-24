@@ -1115,6 +1115,40 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForPlayerUIFrame
       objectReference: {fileID: 0}
+    - target: {fileID: 586008494, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4667828bc24094141963ca09c6559807,
+        type: 3}
+    - target: {fileID: 586008494, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298686888133403657, guid: 554c767cecf02f842abe189dc955cb29,
+        type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 6edaddcdb0029b14ba6e825da5ee64f9,
+        type: 3}
+    - target: {fileID: 7298686888133403657, guid: 554c767cecf02f842abe189dc955cb29,
+        type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 36
+      objectReference: {fileID: 0}
+    - target: {fileID: 7298686888133403657, guid: 554c767cecf02f842abe189dc955cb29,
+        type: 3}
+      propertyPath: m_FontData.m_MaxSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1803303979, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 4667828bc24094141963ca09c6559807,
+        type: 3}
+    - target: {fileID: 1803303979, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 36
+      objectReference: {fileID: 0}
     - target: {fileID: 7298686887023959341, guid: 554c767cecf02f842abe189dc955cb29,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1224,6 +1258,15 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 388311852, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -272
+      objectReference: {fileID: 0}
+    - target: {fileID: 9033221457239463654, guid: 554c767cecf02f842abe189dc955cb29,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 554c767cecf02f842abe189dc955cb29, type: 3}
